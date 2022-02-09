@@ -1,0 +1,15 @@
+.board {
+    height: 600px;
+    width: 600px;
+    cursor: pointer;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.board > div:nth-child(odd) > div:nth-child(even) {
+    background-color: gray;
+}
+
+.board > div:nth-child(even) > div:nth-child(odd) {
+    background-color: gray;
+}
