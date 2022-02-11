@@ -14,7 +14,7 @@ const ar6to7 = [
 const initialState = {
     selection : null,
     board : [...ar0and1 , ...twoToFive , ...ar6to7 ],
-    A_turn : false,
+    turn : 'B',
     available_moves : null
 }
 
@@ -35,10 +35,20 @@ export const BoardSlice = createSlice({
       d[current_row][current_box] = piece
       d[row][box] = ''
       state.selection = null
+      state.turn = state.turn === 'A' ? 'B' : 'A'
+      state.available_moves = null
+    },
+    setAvailableMoves : (state , action) => {
+      state.available_moves = action.payload
+    },
+    clearAvailableMoves : (state) => {
+      state.available_moves = null
     }
   },
 })
 
-export const { select , deselect , move } = BoardSlice.actions
+export const { 
+  select , deselect , move , setAvailableMoves ,clearAvailableMoves
+  } = BoardSlice.actions
 
 export default BoardSlice.reducer

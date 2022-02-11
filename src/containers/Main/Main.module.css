@@ -6,10 +6,19 @@
     box-sizing: border-box;
 }
 
-.board > div:nth-child(odd) > div:nth-child(even) {
+.board > div:nth-child(odd) > button:nth-child(even) {
     background-color: gray;
+    outline: none;
+    border: none;
 }
 
-.board > div:nth-child(even) > div:nth-child(odd) {
+.board > div:nth-child(even) > button:nth-child(odd) {
     background-color: gray;
+    outline: none;
+}
+
+.board > div > button {
+    color: black;
+    border: none;
+    
 }

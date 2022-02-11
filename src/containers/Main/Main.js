@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Row from '../../components/Row/Row';
-import checkMoves from '../../utils/checkMoves';
+import { setAvailableMoves } from '../../features/Board/BoardSlice';
+import checkMoves, { clearMoves } from '../../utils/checkMoves';
 import classes from './Main.module.css'
 
 const Main = () => {
