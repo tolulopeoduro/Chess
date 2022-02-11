@@ -4,18 +4,19 @@ import classes from './Row.module.css'
 
 const Row = (props) => {
 
-    const { index , data , handleClick } = props
+    const { row , data , handleClick } = props
 
 
-  return (
-      <div className={classes.row}>
-          {
-              data.map((d) => (
-                  <Box data={d} handleClick = {handleClick}/>
-              ))
-          }
-      </div>
-  );
+
+    return (
+        <div className={classes.row}>
+            {
+                data.map((d , index) => (
+                    <Box data={d} box = {index} row = {row} handleClick = {handleClick}/>
+                ))
+            }
+        </div>
+    );
 };
 
 export default Row;
