@@ -7,6 +7,8 @@ const checkMoves = (data , row , box) => {
     data === 'pawn_A' && checkPawnMovesA(data , row , box)
     data === 'pawn_B' && checkPawnMovesB(data , row , box)
     data.split('_')[0] === 'knight' && checkKnightMoves(data , row , box)
+    data.split('_')[0] === 'rook' && checkRookMoves(data , row , box)
+    
 }
 
 export const clearMoves = store.dispatch(clearAvailableMoves())
@@ -23,7 +25,8 @@ const checkPawnMovesB = (data , row , box) => {
     }
     if(b[row-1][box+1]?.split('_')[1] === 'A') {
         available_moves.push({row : row-1 , box : box+1 })
-    }
+        }
+        console.log(available_moves)
     store.dispatch(setAvailableMoves(available_moves))
 }
 
@@ -58,6 +61,38 @@ const checkKnightMoves = (data , row , box ) => {
         {row : row-1 , box : box+2} , {row : row-1 , box : box-2} , {row : row+1 , box : box+2 , row : row+1 , box : box-2}
     ]
     for (let i = 0 ; i < p.length ; i++) {checkValidity(p[i].row , p[i].box)}
+    store.dispatch(setAvailableMoves(available_moves))
+}
+
+const checkRookMoves = (data , row , box) => {
+    const type = data.split('_')[1]
+    const available_moves = []
+    const b = state.board.board
+
+    const checkValidity = (r , x) => {
+        if (r > 7 || x > 7 || r < 0 || x < 0) return
+        if(b[r][x] === '') {
+            available_moves.push({row : r , box : x })
+        } else if (b[r][x].split('_')[1] !== type) {
+            available_moves.push({row : r , box : x })
+            return 'end'
+        } else if (b[r][x].split('_')[1] === type) {
+            return 'end'
+        }
+    }
+
+    for (let i = row+1 ; i < 8; i++) {
+        if(checkValidity(i , box)) break
+    }
+    for (let i = row-1; i >= 0; i-- ) {
+        if (checkValidity(i , box)) break
+    }
+    for (let i = box+1 ; i < 8; i++) {
+        if(checkValidity(row , i))break
+    }
+    for (let i = box-1; i >= 0; i-- ) {
+        if(checkValidity(row , i))break
+    }
     store.dispatch(setAvailableMoves(available_moves))
 }
 
