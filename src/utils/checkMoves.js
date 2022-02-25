@@ -10,6 +10,7 @@ const checkMoves = (data , row , box) => {
     piece === 'knight' && checkKnightMoves(data , row , box)
     piece === 'rook' && checkRookMoves(data , row , box)
     piece === 'bishop' && checkBishopMoves(data , row , box)
+    piece === 'queen' && checkQueenMoves(data , row , box)
     
 }
 
@@ -115,6 +116,38 @@ const checkBishopMoves = (data , row , box) => {
     for (let i = 0; i <= 8; i++ ) {if (checkValidity(row+1+i , box+1+i)) break}
     
     store.dispatch(setAvailableMoves(available_moves))
+}
+
+const checkQueenMoves = (data , row , box) => {
+    const type = data.split('_')[1]
+    const available_moves = []
+    const b = store.getState().board.board
+    
+    const checkValidity = (r , x) => {
+        if (r > 7 || x > 7 || r < 0 || x < 0) return 'end'
+        const p = b[r][x]
+        if(p === '') {
+            available_moves.push({row : r , box : x })
+        } else if (p.split('_')[1] !== type) {
+            available_moves.push({row : r , box : x })
+            return 'end'
+        } else if (p.split('_')[1] === type) {
+            return 'end'
+        }
+    }
+    
+    for (let i = 0; i <= 8; i++ ) {if (checkValidity(row-1-i , box-1-i)) break}
+    for (let i = 0; i <= 8; i++ ) {if (checkValidity(row-1-i , box+1+i)) break}
+    for (let i = 0; i <= 8; i++ ) {if (checkValidity(row+1+i , box-1-i)) break}
+    for (let i = 0; i <= 8; i++ ) {if (checkValidity(row+1+i , box+1+i)) break}
+
+    for (let i = 0; i <= 8; i++ ) {if (checkValidity(row-1-i , box)) break}
+    for (let i = 0; i <= 8; i++ ) {if (checkValidity(row+1+i , box)) break}
+    for (let i = 0; i <= 8; i++ ) {if (checkValidity(row , box+1+i)) break}
+    for (let i = 0; i <= 8; i++ ) {if (checkValidity(row, box-1-i)) break}
+    
+    store.dispatch(setAvailableMoves(available_moves))
+
 }
 
 export default checkMoves
