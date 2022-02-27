@@ -14,7 +14,7 @@ const ar6to7 = [
 const initialState = {
     selection : null,
     board : [...ar0and1 , ...twoToFive , ...ar6to7 ],
-    turn : 'B',
+    turn : 'A',
     available_moves : null
 }
 
