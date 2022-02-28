@@ -1,0 +1,14 @@
+.playerContainer {
+    width: 30vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.removedPieces {
+    width: 160px;
+    display: grid;
+    grid-template-columns: repeat(2 , 1fr);
+}
+

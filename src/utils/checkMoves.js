@@ -19,7 +19,7 @@ export const clearMoves = store.dispatch(clearAvailableMoves())
 
 const checkPawnMovesB = (data , row , box) => {
     const available_moves = []
-    const b = state.board.board
+    const b = store.getState().board.board
     row === 6 && available_moves.push({row : row-2 , box : box })
     if(b[row-1][box] === '') {
         available_moves.push({row : row-1 , box : box })
@@ -30,7 +30,6 @@ const checkPawnMovesB = (data , row , box) => {
     if(b[row-1][box+1]?.split('_')[1] === 'A') {
         available_moves.push({row : row-1 , box : box+1 })
         }
-        console.log(available_moves)
     store.dispatch(setAvailableMoves(available_moves))
 }
 

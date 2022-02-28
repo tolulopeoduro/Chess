@@ -15,7 +15,11 @@ const initialState = {
     selection : null,
     board : [...ar0and1 , ...twoToFive , ...ar6to7 ],
     turn : 'A',
-    available_moves : null
+    available_moves : null,
+    removed_pieces : {
+      "A" : [],
+      "B" : []
+    }
 }
 
 export const BoardSlice = createSlice({
@@ -32,6 +36,13 @@ export const BoardSlice = createSlice({
       const d = [...state.board]
       const {piece , row , box} = state.selection 
       const {current_piece , current_row , current_box} = action.payload
+      if (current_piece !== "") {
+        const a = {...state.removed_pieces}
+        const p = current_piece.split('_')[1] === "A" ? "B" : "A"
+        console.log(a[p])
+        a[p].push(current_piece)
+        console.log(a)
+      }
       d[current_row][current_box] = piece
       d[row][box] = ''
       state.selection = null
