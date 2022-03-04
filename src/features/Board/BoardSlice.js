@@ -39,9 +39,7 @@ export const BoardSlice = createSlice({
       if (current_piece !== "") {
         const a = {...state.removed_pieces}
         const p = current_piece.split('_')[1] === "A" ? "B" : "A"
-        console.log(a[p])
         a[p].push(current_piece)
-        console.log(a)
       }
       d[current_row][current_box] = piece
       d[row][box] = ''

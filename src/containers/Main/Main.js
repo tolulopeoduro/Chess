@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Row from '../../components/Row/Row';
 import { setAvailableMoves } from '../../features/Board/BoardSlice';
 import checkMoves, { clearMoves } from '../../utils/checkMoves';
+import findAllPieces from '../../utils/findAllPieces';
+import findCheck from '../../utils/findCheck';
 import classes from './Main.module.css'
 
 const Main = () => {
@@ -18,6 +20,9 @@ const Main = () => {
         }
     }, [selection])
 
+    useEffect(() => {
+        findAllPieces()
+    } , [board])
 
     return (
         <div className={classes.board}>
