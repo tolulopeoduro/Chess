@@ -52,7 +52,8 @@ const rook = (data , row , box) => {
         } else if (p.split('_')[1] !== type) {
             if (p.split('_')[0] === 'king') {
                 available_moves.push({row : r , box : x })
-                console.log('check' , type === 'A' ? 'B' : 'A' , available_moves)
+                available_moves.unshift({row , box})
+                store.dispatch(addCheck(available_moves))
             }
             return 'end'
         } else if (p.split('_')[1] === type) return 'end'
@@ -78,7 +79,7 @@ const queen = (data , row , box) => {
         } else if (p.split('_')[1] !== type) {
             if (p.split('_')[0] === 'king') {
                 available_moves.push({row : r , box : x })
-                // console.log('check' , type === 'A' ? 'B' : 'A' , available_moves)
+                available_moves.unshift({row , box})
                 store.dispatch(addCheck(available_moves))
             }
             return 'end'
@@ -105,7 +106,8 @@ const knight = (data , row , box) => {
         if(b[r][x].split('_')[1] !== type ) {
             if (b[r][x].split('_')[0] === 'king') {
                 available_moves.push({row : r , box : x })
-                console.log('check' , type === 'A' ? 'B' : 'A ' , available_moves)
+                available_moves.unshift({row , box})
+                store.dispatch(addCheck(available_moves))
             }
         }
     }
@@ -129,6 +131,7 @@ const king = (data , row , box) => {
         } else if (p.split('_')[1] !== type) {
             if (p.split('_')[0] === 'king') {
                 available_moves.push({row : r , box : x })
+                available_moves.unshift({row , box})
                 store.dispatch(addCheck(available_moves))
             }
             return 'end'
@@ -163,13 +166,15 @@ const pawn = (data , row , box) => {
     if(B[r][b]?.split('_')[1] === opp) {
         if (B[r][b] === `king_${opp}`) {
             available_moves.push({row : r , box : b})
+            available_moves.unshift({row , box})
             store.dispatch(addCheck(available_moves))
         } 
         
     }
     if(B[r][c]?.split('_')[1] === opp) {
         if (B[r][c] === `king_${opp}`) {
-            available_moves.push({row : r , box : c})
+            available_moves.push({row : r , box : c })
+            available_moves.unshift({row , box})
             store.dispatch(addCheck(available_moves))
         } 
     }

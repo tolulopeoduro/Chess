@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Row from '../../components/Row/Row';
-import { setAvailableMoves } from '../../features/Board/BoardSlice';
 import checkMoves, { clearMoves } from '../../utils/checkMoves';
 import findAllPieces from '../../utils/findAllPieces';
-import findCheck from '../../utils/findCheck';
 import classes from './Main.module.css'
 
 const Main = () => {
@@ -12,6 +10,7 @@ const Main = () => {
     
     const selection = useSelector(state => state.board.selection)
     const board  = useSelector(state => state.board.board)
+    const turn = useSelector(state => state.board.turn)
 
     useEffect(() => {
         if (selection) {
@@ -21,8 +20,8 @@ const Main = () => {
     }, [selection])
 
     useEffect(() => {
-        findAllPieces()
-    } , [board])
+        findAllPieces(turn === 'A' ? 'B' : 'A')
+    } , [turn])
 
     return (
         <div className={classes.board}>
