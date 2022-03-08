@@ -1,4 +1,4 @@
-import { addCheck } from '../features/Board/CheckSlice'
+import { addCheck, setCheckSide } from '../features/Board/CheckSlice'
 import {store} from '../store'
 
 const findCheck = (data , row , box , testBoard) => {
@@ -26,6 +26,7 @@ const bishop = (data , row , box , testBoard) => {
             if (p.split('_')[0] === 'king') {
                 available_moves.push({row : r , box : x })
                 available_moves.unshift({row , box})
+                store.dispatch(setCheckSide(type === 'A' ? 'B' : 'A'))
                 store.dispatch(addCheck(available_moves))
                 return 'end'
             } else return 'end'
@@ -53,6 +54,7 @@ const rook = (data , row , box) => {
             if (p.split('_')[0] === 'king') {
                 available_moves.push({row : r , box : x })
                 available_moves.unshift({row , box})
+                store.dispatch(setCheckSide(type === 'A' ? 'B' : 'A'))
                 store.dispatch(addCheck(available_moves))
             }
             return 'end'
@@ -80,6 +82,7 @@ const queen = (data , row , box) => {
             if (p.split('_')[0] === 'king') {
                 available_moves.push({row : r , box : x })
                 available_moves.unshift({row , box})
+                store.dispatch(setCheckSide(type === 'A' ? 'B' : 'A'))
                 store.dispatch(addCheck(available_moves))
             }
             return 'end'
@@ -107,6 +110,7 @@ const knight = (data , row , box) => {
             if (b[r][x].split('_')[0] === 'king') {
                 available_moves.push({row : r , box : x })
                 available_moves.unshift({row , box})
+                store.dispatch(setCheckSide(type === 'A' ? 'B' : 'A'))
                 store.dispatch(addCheck(available_moves))
             }
         }
@@ -132,6 +136,7 @@ const king = (data , row , box) => {
             if (p.split('_')[0] === 'king') {
                 available_moves.push({row : r , box : x })
                 available_moves.unshift({row , box})
+                store.dispatch(setCheckSide(type === 'A' ? 'B' : 'A'))
                 store.dispatch(addCheck(available_moves))
             }
             return 'end'
@@ -167,6 +172,7 @@ const pawn = (data , row , box) => {
         if (B[r][b] === `king_${opp}`) {
             available_moves.push({row : r , box : b})
             available_moves.unshift({row , box})
+            store.dispatch(setCheckSide(type === 'A' ? 'B' : 'A'))
             store.dispatch(addCheck(available_moves))
         } 
         
@@ -175,6 +181,7 @@ const pawn = (data , row , box) => {
         if (B[r][c] === `king_${opp}`) {
             available_moves.push({row : r , box : c })
             available_moves.unshift({row , box})
+            store.dispatch(setCheckSide(type === 'A' ? 'B' : 'A'))
             store.dispatch(addCheck(available_moves))
         } 
     }

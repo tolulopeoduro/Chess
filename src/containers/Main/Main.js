@@ -10,6 +10,7 @@ const Main = () => {
     
     const selection = useSelector(state => state.board.selection)
     const board  = useSelector(state => state.board.board)
+    const check = useSelector(state => state.check)
     const turn = useSelector(state => state.board.turn)
 
     useEffect(() => {
@@ -22,6 +23,10 @@ const Main = () => {
     useEffect(() => {
         findAllPieces(turn === 'A' ? 'B' : 'A')
     } , [turn])
+
+    useEffect(() => {
+        console.log(check)
+    }, [check])
 
     return (
         <div className={classes.board}>
