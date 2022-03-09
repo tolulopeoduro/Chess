@@ -11,6 +11,7 @@ const Box = (props) => {
 
     const {selection , turn , available_moves} = useSelector(state => state.board)
     const b = useSelector(state => state.board)
+    const check = useSelector(state => state.check)
 
     const dispatch = useDispatch()
     const {index , data , row , box } = props
@@ -41,6 +42,7 @@ const Box = (props) => {
             dispatch(select(null))
         }
         if (selection && is_available) {
+            if (check.side === turn) return 
             dispatch(move({
                 current_piece : data,
                 current_row : row,

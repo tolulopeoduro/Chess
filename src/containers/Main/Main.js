@@ -25,7 +25,7 @@ const Main = () => {
     } , [turn])
 
     useEffect(() => {
-        console.log(check)
+        console.log(check.side)
     }, [check])
 
     return (
