@@ -1,13 +1,14 @@
 import { addCheck, setCheckSide } from '../features/Board/CheckSlice'
 import {store} from '../store'
+import {addTestCheck , clearTestCheck , setTestCheckSide} from '../features/TestBoard/TestCheck'
 
 const findCheck = (data , row , box , testBoard) => {
     const piece = data.split('_')[0]
-    piece === 'bishop' && bishop(data , row , box)
-    piece === 'rook' && rook(data , row , box)
-    piece === 'queen' && queen(data , row , box)
-    piece === 'knight' && knight(data , row , box)
-    piece === 'pawn' && pawn(data , row , box)
+    piece === 'bishop' && bishop(data , row , box , testBoard)
+    piece === 'rook' && rook(data , row , box , testBoard)
+    piece === 'queen' && queen(data , row , box , testBoard)
+    piece === 'knight' && knight(data , row , box , testBoard)
+    piece === 'pawn' && pawn(data , row , box , testBoard)
 }
 
 
@@ -15,7 +16,7 @@ const findCheck = (data , row , box , testBoard) => {
 const bishop = (data , row , box , testBoard) => {
     const type = data.split('_')[1]
     let available_moves = []
-    const b = store.getState().board.board
+    const b = testBoard || store.getState().board.board
 
     const checkValidity = (r , x) => {
         if (r > 7 || x > 7 || r < 0 || x < 0) return 'end'
@@ -26,6 +27,11 @@ const bishop = (data , row , box , testBoard) => {
             if (p.split('_')[0] === 'king') {
                 available_moves.push({row : r , box : x })
                 available_moves.unshift({row , box})
+                if(testBoard) {
+                    store.dispatch(setTestCheckSide(type === 'A' ? 'B' : 'A'))
+                    store.dispatch(addTestCheck(available_moves))
+                    return 'end'
+                }
                 store.dispatch(setCheckSide(type === 'A' ? 'B' : 'A'))
                 store.dispatch(addCheck(available_moves))
                 return 'end'
@@ -40,10 +46,10 @@ const bishop = (data , row , box , testBoard) => {
     
 }
 
-const rook = (data , row , box) => {
+const rook = (data , row , box , testBoard) => {
     const type = data.split('_')[1]
     let available_moves = []
-    const b = store.getState().board.board
+    const b = testBoard || store.getState().board.board
 
     const checkValidity = (r , x) => {
         if (r > 7 || x > 7 || r < 0 || x < 0) return 'end'
@@ -54,6 +60,11 @@ const rook = (data , row , box) => {
             if (p.split('_')[0] === 'king') {
                 available_moves.push({row : r , box : x })
                 available_moves.unshift({row , box})
+                if(testBoard) {
+                    store.dispatch(setTestCheckSide(type === 'A' ? 'B' : 'A'))
+                    store.dispatch(addTestCheck(available_moves))
+                    return 'end'
+                }
                 store.dispatch(setCheckSide(type === 'A' ? 'B' : 'A'))
                 store.dispatch(addCheck(available_moves))
             }
@@ -67,11 +78,11 @@ const rook = (data , row , box) => {
     for (let i = box-1; i >= 0; i-- ) {if(checkValidity(row , i))break} ;available_moves = []
 }
 
-const queen = (data , row , box) => {
+const queen = (data , row , box , testBoard) => {
 
     const type = data.split('_')[1]
     let available_moves = []
-    const b = store.getState().board.board
+    const b = testBoard || store.getState().board.board
     
     const checkValidity = (r , x) => {
         if (r > 7 || x > 7 || r < 0 || x < 0) return 'end'
@@ -82,6 +93,11 @@ const queen = (data , row , box) => {
             if (p.split('_')[0] === 'king') {
                 available_moves.push({row : r , box : x })
                 available_moves.unshift({row , box})
+                if(testBoard) {
+                    store.dispatch(setTestCheckSide(type === 'A' ? 'B' : 'A'))
+                    store.dispatch(addTestCheck(available_moves))
+                    return 'end'
+                }
                 store.dispatch(setCheckSide(type === 'A' ? 'B' : 'A'))
                 store.dispatch(addCheck(available_moves))
             }
@@ -100,16 +116,21 @@ const queen = (data , row , box) => {
     for (let i = 0; i <= 8; i++ ) {if (checkValidity(row, box-1-i)) break} ; available_moves = []
 }
 
-const knight = (data , row , box) => {
+const knight = (data , row , box , testBoard) => {
     const type = data.split('_')[1]
     let available_moves = []
-    const b = store.getState().board.board
+    const b = testBoard || store.getState().board.board
     const checkValidity = (r , x) => {
         if (r > 7 || x > 7 || r < 0 || x < 0) return
         if(b[r][x].split('_')[1] !== type ) {
             if (b[r][x].split('_')[0] === 'king') {
                 available_moves.push({row : r , box : x })
                 available_moves.unshift({row , box})
+                if(testBoard) {
+                    store.dispatch(setTestCheckSide(type === 'A' ? 'B' : 'A'))
+                    store.dispatch(addTestCheck(available_moves))
+                    return 'end'
+                }
                 store.dispatch(setCheckSide(type === 'A' ? 'B' : 'A'))
                 store.dispatch(addCheck(available_moves))
             }
@@ -122,10 +143,10 @@ const knight = (data , row , box) => {
     for (let i = 0 ; i < p.length ; i++) {checkValidity(p[i].row , p[i].box)}
 }
 
-const king = (data , row , box) => {
+const king = (data , row , box , testBoard) => {
     const type = data.split('_')[1]
     let available_moves = []
-    const b = store.getState().board.board
+    const b = testBoard || store.getState().board.board
     
     const checkValidity = (r , x) => {
         if (r > 7 || x > 7 || r < 0 || x < 0) return 'end'
@@ -136,6 +157,11 @@ const king = (data , row , box) => {
             if (p.split('_')[0] === 'king') {
                 available_moves.push({row : r , box : x })
                 available_moves.unshift({row , box})
+                if(testBoard) {
+                    store.dispatch(setTestCheckSide(type === 'A' ? 'B' : 'A'))
+                    store.dispatch(addTestCheck(available_moves))
+                    return 'end'
+                }
                 store.dispatch(setCheckSide(type === 'A' ? 'B' : 'A'))
                 store.dispatch(addCheck(available_moves))
             }
@@ -155,13 +181,13 @@ const king = (data , row , box) => {
     checkValidity(row, box-1) ; available_moves = []
 }
 
-const pawn = (data , row , box) => {
+const pawn = (data , row , box , testBoard) => {
     const type = data.split('_')[1]
     const opp = type === 'A' ? 'B' : 'A'
     const available_moves = []
     const r = type === 'B' ? row-1 : row+1 
     const {a , b , c} = {a : box , b : box - 1 , c : box+1};
-    const B = store.getState().board.board
+    const B = testBoard || store.getState().board.board
     if (row === 0 || row === 7) return 
     type === 'A' && row === 1 && (B[row+1][box] === '' && B[row+2][box] === '') && available_moves.push({row : row+2 , box : box })
     type === 'B' && row === 6 && (B[row-1][box] === '' && B[row-2][box] === '') && available_moves.push({row : row-2 , box : box })
@@ -172,6 +198,11 @@ const pawn = (data , row , box) => {
         if (B[r][b] === `king_${opp}`) {
             available_moves.push({row : r , box : b})
             available_moves.unshift({row , box})
+            if(testBoard) {
+                store.dispatch(setTestCheckSide(type === 'A' ? 'B' : 'A'))
+                store.dispatch(addTestCheck(available_moves))
+                return 'end'
+            }
             store.dispatch(setCheckSide(type === 'A' ? 'B' : 'A'))
             store.dispatch(addCheck(available_moves))
         } 
@@ -181,6 +212,11 @@ const pawn = (data , row , box) => {
         if (B[r][c] === `king_${opp}`) {
             available_moves.push({row : r , box : c })
             available_moves.unshift({row , box})
+            if(testBoard) {
+                store.dispatch(setTestCheckSide(type === 'A' ? 'B' : 'A'))
+                store.dispatch(addTestCheck(available_moves))
+                return 'end'
+            }
             store.dispatch(setCheckSide(type === 'A' ? 'B' : 'A'))
             store.dispatch(addCheck(available_moves))
         } 

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Row from '../../components/Row/Row';
 import checkMoves, { clearMoves } from '../../utils/checkMoves';
 import findAllPieces from '../../utils/findAllPieces';
+import findAllMoves from '../../utils/findCheckMate';
 import classes from './Main.module.css'
 
 const Main = () => {
@@ -12,6 +13,8 @@ const Main = () => {
     const board  = useSelector(state => state.board.board)
     const check = useSelector(state => state.check)
     const turn = useSelector(state => state.board.turn)
+    const testBoard = useSelector(state => state.board.testBoard)
+    const testCheck = useSelector(state => state.board.testCheck)
 
     useEffect(() => {
         if (selection) {
@@ -25,14 +28,15 @@ const Main = () => {
     } , [turn])
 
     useEffect(() => {
-        console.log(check.side)
+        findAllMoves(check.side)
     }, [check])
+
 
     return (
         <div className={classes.board}>
             {
                 board?.map((row , index) => (
-                    <Row row = {index} data ={row} />
+                    <Row key = {index} row = {index} data ={row} />
                 ))
             }
         </div>

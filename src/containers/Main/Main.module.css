@@ -1,6 +1,6 @@
 .board {
-    height: 80vh;
-    width: 80vh;
+    height: 400px;
+    width: 400px;
     cursor: pointer;
     border: 1px solid black;
     box-sizing: border-box;

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { select , move } from '../../features/Board/BoardSlice';
 import classes from './Box.module.css'
 import cx from 'classnames'
+import avoid_checks from '../../utils/avoidChecks';
 
 const Box = (props) => {
 
@@ -42,11 +43,18 @@ const Box = (props) => {
             dispatch(select(null))
         }
         if (selection && is_available) {
-            if (check.side === turn) return 
+            if (turn === check.side) {
+                avoid_checks({
+                    current_piece : data,
+                    current_row : row,
+                    current_box : box,
+                })
+                return
+            }
             dispatch(move({
                 current_piece : data,
                 current_row : row,
-                current_box : box 
+                current_box : box,
             }))
         }
     }
