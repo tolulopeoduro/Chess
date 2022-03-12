@@ -35,13 +35,10 @@ const avoidChecks = (current_selection , init) => {
     findAllPieces(store.getState().check.side === 'A' ? 'B' : 'A' , d)
     const checks = store.getState().testcheck
     const avoided = checks.side === null && checks.moves.length === 0
-    console.log(piece , row , box , d)
-    console.log(checks)
     if (init) {
         return avoided
     }
     avoided ? store.dispatch(move({...current_selection})) : alert(`${checks.side} is still on Check`)
-    console.log(avoided)
 }
 
 export default avoidChecks
