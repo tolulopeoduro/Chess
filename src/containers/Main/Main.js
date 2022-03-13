@@ -28,8 +28,13 @@ const Main = () => {
     } , [turn])
 
     useEffect(() => {
-        findAllMoves(check.side)
+        if (check.checkmate) return
+        check.side && findAllMoves(check.side)
     }, [check])
+    
+    useEffect(() => {
+        check.checkmate && alert('Checkmate')
+    } , [check.checkmate])
 
 
     return (

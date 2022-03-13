@@ -1,5 +1,5 @@
 import { clearAvailableMoves } from "../features/Board/BoardSlice"
-import { clearCheck, setCheckSide } from "../features/Board/CheckSlice"
+import { clearCheck, setCheckMate, setCheckSide } from "../features/Board/CheckSlice"
 import { clearTestCheck } from "../features/TestBoard/TestCheck"
 import { store } from "../store"
 import avoidChecks from "./avoidChecks"
@@ -23,9 +23,8 @@ const findAllMoves = (side) => {
             }
         }
     }
-    const checked = !p.every(a => a === true)
-    console.log(checked)
-    checked && alert('Checkmate')
+    const checked = p.every(a => a === false)
+    checked && store.dispatch(setCheckMate(true))
     store.dispatch(clearAvailableMoves())
 }
 

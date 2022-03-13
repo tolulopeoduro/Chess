@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const ar0and1 = [
-  ['rook_A' , 'knight_A' , 'bishop_A' , 'king_A' , 'queen_A' , 'bishop_A' , 'knight_A' , 'rook_A'],
+  ['rook_A' , 'knight_A' , 'bishop_A' , 'queen_A' , 'king_A' , 'bishop_A' , 'knight_A' , 'rook_A'],
   Array(8).fill('pawn_A')
 ]
 const twoToFive =  Array(4).fill(Array(8).fill(''))

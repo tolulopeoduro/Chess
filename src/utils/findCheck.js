@@ -124,8 +124,9 @@ const knight = (data , row , box , testBoard) => {
         if (r > 7 || x > 7 || r < 0 || x < 0) return
         if(b[r][x].split('_')[1] !== type ) {
             if (b[r][x].split('_')[0] === 'king') {
-                available_moves.push({row : r , box : x })
-                available_moves.unshift({row , box})
+                // available_moves.unshift({row : row , box : box})
+                // available_moves.push({row : r , box : x })
+                available_moves = [{row : row , box : box} , {row : r , box : x}]
                 if(testBoard) {
                     store.dispatch(setTestCheckSide(type === 'A' ? 'B' : 'A'))
                     store.dispatch(addTestCheck(available_moves))

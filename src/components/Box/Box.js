@@ -20,6 +20,8 @@ const Box = (props) => {
     const condition = turn === data.split('_')[1] || data === ""
     
     const handleClick = () => {
+
+        if (check.checkmate) return
         
         if (!selection && turn !== data.split('_')[1]) return
         if (turn === data.split('_')[1] && selection) {

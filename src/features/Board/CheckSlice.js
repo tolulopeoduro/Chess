@@ -2,7 +2,8 @@ import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
     side : null,
-    moves : []
+    moves : [],
+    checkmate : false
 }
 
 export const CheckSlice = createSlice({
@@ -25,10 +26,16 @@ export const CheckSlice = createSlice({
         },
         clearCheck : (state , action) => {
             return initialState
+        },
+        setCheckMate : (state , action) => {
+            return {
+                ...state,
+                checkmate : action.payload
+            }
         }
     }
 })
 
-export const {addCheck , setCheckSide , clearCheck} = CheckSlice.actions
+export const {addCheck , setCheckSide , clearCheck , setCheckMate} = CheckSlice.actions
 
 export default CheckSlice.reducer
