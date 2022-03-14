@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Row from '../../components/Row/Row';
-import { setAvailableMoves } from '../../features/Board/BoardSlice';
 import checkMoves, { clearMoves } from '../../utils/checkMoves';
+import findAllPieces from '../../utils/findAllPieces';
+import findAllMoves from '../../utils/findCheckMate';
 import classes from './Main.module.css'
 
 const Main = () => {
@@ -10,6 +11,10 @@ const Main = () => {
     
     const selection = useSelector(state => state.board.selection)
     const board  = useSelector(state => state.board.board)
+    const check = useSelector(state => state.check)
+    const turn = useSelector(state => state.board.turn)
+    const testBoard = useSelector(state => state.board.testBoard)
+    const testCheck = useSelector(state => state.board.testCheck)
 
     useEffect(() => {
         if (selection) {
@@ -18,12 +23,25 @@ const Main = () => {
         }
     }, [selection])
 
+    useEffect(() => {
+        findAllPieces(turn === 'A' ? 'B' : 'A')
+    } , [turn])
+
+    useEffect(() => {
+        if (check.checkmate) return
+        check.side && findAllMoves(check.side)
+    }, [check])
+    
+    useEffect(() => {
+        check.checkmate && alert('Checkmate')
+    } , [check.checkmate])
+
 
     return (
         <div className={classes.board}>
             {
                 board?.map((row , index) => (
-                    <Row row = {index} data ={row} />
+                    <Row key = {index} row = {index} data ={row} />
                 ))
             }
         </div>

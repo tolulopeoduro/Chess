@@ -12,7 +12,7 @@ const Row = (props) => {
         <div className={classes.row}>
             {
                 data.map((d , index) => (
-                    <Box data={d} box = {index} row = {row} handleClick = {handleClick}/>
+                    <Box data={d} key = {index} box = {index} row = {row} handleClick = {handleClick}/>
                 ))
             }
         </div>

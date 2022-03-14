@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const ar0and1 = [
-  ['rook_A' , 'knight_A' , 'bishop_A' , 'king_A' , 'queen_A' , 'bishop_A' , 'knight_A' , 'rook_A'],
+  ['rook_A' , 'knight_A' , 'bishop_A' , 'queen_A' , 'king_A' , 'bishop_A' , 'knight_A' , 'rook_A'],
   Array(8).fill('pawn_A')
 ]
 const twoToFive =  Array(4).fill(Array(8).fill(''))
@@ -39,9 +39,7 @@ export const BoardSlice = createSlice({
       if (current_piece !== "") {
         const a = {...state.removed_pieces}
         const p = current_piece.split('_')[1] === "A" ? "B" : "A"
-        console.log(a[p])
         a[p].push(current_piece)
-        console.log(a)
       }
       d[current_row][current_box] = piece
       d[row][box] = ''

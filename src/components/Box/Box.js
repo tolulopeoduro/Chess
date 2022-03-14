@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { select , move } from '../../features/Board/BoardSlice';
 import classes from './Box.module.css'
 import cx from 'classnames'
+import avoid_checks from '../../utils/avoidChecks';
 
 const Box = (props) => {
 
@@ -11,6 +12,7 @@ const Box = (props) => {
 
     const {selection , turn , available_moves} = useSelector(state => state.board)
     const b = useSelector(state => state.board)
+    const check = useSelector(state => state.check)
 
     const dispatch = useDispatch()
     const {index , data , row , box } = props
@@ -18,6 +20,8 @@ const Box = (props) => {
     const condition = turn === data.split('_')[1] || data === ""
     
     const handleClick = () => {
+
+        if (check.checkmate) return
         
         if (!selection && turn !== data.split('_')[1]) return
         if (turn === data.split('_')[1] && selection) {
@@ -41,10 +45,18 @@ const Box = (props) => {
             dispatch(select(null))
         }
         if (selection && is_available) {
+            if (turn === check.side) {
+                avoid_checks({
+                    current_piece : data,
+                    current_row : row,
+                    current_box : box,
+                })
+                return
+            }
             dispatch(move({
                 current_piece : data,
                 current_row : row,
-                current_box : box 
+                current_box : box,
             }))
         }
     }
