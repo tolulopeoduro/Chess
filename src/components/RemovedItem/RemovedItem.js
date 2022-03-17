@@ -10,8 +10,8 @@ const RemovedItem = (props) => {
 
   return (
     <div className={classes.removed_piece}>
-        <p>{t(name)}</p>
-        <p>{qty > 1 && `x${qty}`}</p>
+        <img src={require(`../../assets/images/board/${name}.PNG`)} height ='50px'/>
+        <p style={{fontSize : '20px'}}>{qty > 1 && `x${qty}`}</p>
     </div>
   )
 }

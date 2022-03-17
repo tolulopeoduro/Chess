@@ -16,7 +16,8 @@ const Main = () => {
     const testBoard = useSelector(state => state.board.testBoard)
     const testCheck = useSelector(state => state.board.testCheck)
 
-    useEffect(() => {
+    useEffect(() =>
+     {
         if (selection) {
             const {piece , row , box} = selection
             checkMoves(piece , row , box)

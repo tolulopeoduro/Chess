@@ -65,10 +65,13 @@ const Box = (props) => {
 
 
     return (
-        <button className={cx(classes.box , {[classes.available] : is_available} )} onClick={handleClick} >
-            <span></span>
-            {t(data)}
-        </button>
+        <div className={cx(classes.box , {[classes.available] : is_available} )} onClick={handleClick} >
+            {
+            data !== '' ?
+            <img src={require(`../../assets/images/board/${data}.PNG`)} height="100%" />
+            : data
+            }
+        </div>
     );
 };
 

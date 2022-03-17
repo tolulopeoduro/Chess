@@ -10,9 +10,11 @@ function App() {
 
   return (
     <div className='App'>
-      <PlayerDetailsContainer player ="A" removed = {removed['A']}/>
+      <div>
+        <PlayerDetailsContainer player ="A" removed = {removed['A']}/>
+        <PlayerDetailsContainer player ="B" removed = {removed['B']}/>
+      </div>
       <Main/>
-      <PlayerDetailsContainer player ="B" removed = {removed['B']}/>
     </div>
   );
 }
