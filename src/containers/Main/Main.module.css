@@ -1,9 +1,16 @@
+
 .board {
-    height: 400px;
-    width: 400px;
+    height: 95vw;
+    width: 95vw;
     cursor: pointer;
     border: 1px solid black;
     box-sizing: border-box;
+    background-color: rgb(112, 77, 77);
+    background-image: url('../../assets/images/board/board.PNG');
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 4px;
+    border: 0px;
 }
 
 .board > div:nth-child(odd) > button:nth-child(even) {
@@ -22,3 +29,11 @@
     border: none;
     
 }
+
+@media screen and (min-width : 600px) {
+    .board {
+        width: 500px;
+        height: 500px;
+    }   
+}
+

@@ -14,17 +14,11 @@ const avoidChecks = (current_selection , init) => {
                 if (index === current_box) {
                     return piece
                 }
-                if (index === box)  {
-                    return ''
-                }
                 return b
             })
         } else if (index === row) {
             return a.map((b , index) => {
                 if (index === box) {
-                    return ''
-                } 
-                if (index === box)  {
                     return ''
                 }
                 return b

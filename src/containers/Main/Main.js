@@ -16,7 +16,8 @@ const Main = () => {
     const testBoard = useSelector(state => state.board.testBoard)
     const testCheck = useSelector(state => state.board.testCheck)
 
-    useEffect(() => {
+    useEffect(() =>
+     {
         if (selection) {
             const {piece , row , box} = selection
             checkMoves(piece , row , box)
@@ -31,10 +32,6 @@ const Main = () => {
         if (check.checkmate) return
         check.side && findAllMoves(check.side)
     }, [check])
-    
-    useEffect(() => {
-        check.checkmate && alert('Checkmate')
-    } , [check.checkmate])
 
 
     return (
