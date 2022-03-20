@@ -1,0 +1,8 @@
+.removedPieces {
+    width: 160px;
+    display: grid;
+    grid-template-columns: repeat(2 , 1fr);
+    align-self:center;
+    height: 500px;
+    background-color: red;
+}

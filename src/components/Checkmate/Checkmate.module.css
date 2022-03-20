@@ -1,0 +1,61 @@
+.mainContainer {
+    height: 200px;
+    width: 95vw;
+    background-color: orange;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mainContainer > div:nth-child(1) {
+    height: 30px;
+    width: 100%;
+    color: wheat;
+    text-transform: uppercase;
+    background-color: brown;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.mainContainer > div:nth-child(1) > p {
+    color: wheat;
+    align-self: flex-end;
+    height: 100%;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+}
+
+.mainContainer > div:nth-child(1) > h1 {
+    background-color: red;
+    align-self: center;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding-left: 30px;
+}
+
+.mainContainer > div {
+    height: 170px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancelButton {
+    font-family: sans-serif;
+    text-transform: lowercase;
+    cursor: pointer;
+}
+
+.cancelButton:hover {
+    font-size: 1.2rem;
+}

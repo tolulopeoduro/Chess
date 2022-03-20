@@ -3,18 +3,43 @@ import './App.css';
 import Main from './containers/Main/Main';
 import PlayerDetailsContainer from './components/PlayerDetailsContainer/PlayerDetailsContainer';
 import { useSelector } from 'react-redux';
+import WithModal from './components/Modal/Modal';
+import Checkmate from './components/Checkmate/Checkmate';
+import { useEffect, useState } from 'react';
 
 function App() {
 
   const removed = useSelector(state => state.board.removed_pieces)
+  const check = useSelector(state => state.check)
+
+  const [messages , setMessages] = useState({
+    check : false,
+    checkmate : false,
+    pawnChange : true
+  })
+
+  const toggleMessages = (m , bool) => {
+    const a = {...messages}
+    a[m] = bool
+    setMessages(a)
+  }
+
+  useEffect(()=> {
+    check.checkmate && toggleMessages('checkmate' , true)
+  } , [check])
 
   return (
     <div className='App'>
+        <PlayerDetailsContainer player ="A" removed = {removed['A']} isLargeScreen/>
       <div>
+        <div>
         <PlayerDetailsContainer player ="A" removed = {removed['A']}/>
-        <PlayerDetailsContainer player ="B" removed = {removed['B']}/>
-      </div>
-      <Main/>
+        <PlayerDetailsContainer player ="B" removed = {removed['B']}/>  
+        </div>
+        <Main/>
+      </div> 
+      {(check.checkmate && messages.checkmate) && <Checkmate handleClose = {() => toggleMessages('checkmate' , false)}/>}
+      <PlayerDetailsContainer player ="B" removed = {removed['B']} isLargeScreen/>  
     </div>
   );
 }
