@@ -9,11 +9,6 @@ const RemovedItem = (props) => {
     const {name , qty} = props.data
     const {t} = useTranslation()
 
-    useEffect(() => {
-      console.log(isLargeScreen)
-    },[isLargeScreen])
-
-
   return (
     <div className={cx({[classes.removed_piece] : !isLargeScreen} , {[classes.large] : isLargeScreen} )}>
         <img src={require(`../../assets/images/board/${name}.PNG`)}/>

@@ -3,36 +3,21 @@ import { setTestBoard } from "../features/TestBoard/TestBoard"
 import { store } from "../store"
 import findAllPieces from "./findAllPieces"
 import findCheck from "./findCheck"
+import movePiece from "./Move"
+import setMove from "./setTestBoard"
 
 const avoidChecks = (current_selection , init) => {
     const {current_piece , current_row , current_box} = current_selection
     const {piece , row , box} = init ? init : store.getState().board.selection
     const board = store.getState().board.board
-    const d = board.map((a , index) => {
-        if (index === current_row) {
-            return a.map((b , index) => {
-                if (index === current_box) {
-                    return piece
-                }
-                return b
-            })
-        } else if (index === row) {
-            return a.map((b , index) => {
-                if (index === box) {
-                    return ''
-                }
-                return b
-            })
-        }
-        else return a
-    })
+
+    const d = setMove({piece , row , box} , current_selection)
     findAllPieces(store.getState().check.side === 'A' ? 'B' : 'A' , d)
     const checks = store.getState().testcheck
     const avoided = checks.side === null && checks.moves.length === 0
-    if (init) {
-        return avoided
-    }
-    avoided ? store.dispatch(move({...current_selection})) : alert(`${checks.side} is still on Check`)
+    if (init) return avoided
+    console.log(avoided)
+    avoided ? movePiece(current_selection) : alert(`${checks.side} is still on Check`)
 }
 
 export default avoidChecks

@@ -5,6 +5,7 @@ import { select , move } from '../../features/Board/BoardSlice';
 import classes from './Box.module.css'
 import cx from 'classnames'
 import avoid_checks from '../../utils/avoidChecks';
+import movePiece from '../../utils/Move';
 
 const Box = (props) => {
 
@@ -53,11 +54,16 @@ const Box = (props) => {
                 })
                 return
             }
-            dispatch(move({
+            // dispatch(move({
+            //     current_piece : data,
+            //     current_row : row,
+            //     current_box : box,
+            // }))
+            movePiece({
                 current_piece : data,
                 current_row : row,
                 current_box : box,
-            }))
+            })
         }
     }
     
