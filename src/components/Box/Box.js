@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { select , move } from '../../features/Board/BoardSlice';
+import { select , move, setPawnMenu } from '../../features/Board/BoardSlice';
 import classes from './Box.module.css'
 import cx from 'classnames'
 import avoid_checks from '../../utils/avoidChecks';
+import movePiece from '../../utils/Move';
 
 const Box = (props) => {
 
@@ -44,7 +45,23 @@ const Box = (props) => {
         if (selection.row === row && selection.box === box)  {
             dispatch(select(null))
         }
+
         if (selection && is_available) {
+            const currentMove = {
+                current_piece : data,
+                current_row : row,
+                current_box : box,
+            }
+            if (selection.piece === 'pawn_A' && row ===7) {
+                dispatch(setPawnMenu({side : 'A' , currentMove , oncheck : check.side === turn}))
+                return 
+            }
+
+            if (selection.piece === 'pawn_B' && row ===0) {
+                dispatch(setPawnMenu({side : 'B' , currentMove , oncheck : check.side === turn}))
+                return
+            }
+
             if (turn === check.side) {
                 avoid_checks({
                     current_piece : data,
@@ -53,11 +70,12 @@ const Box = (props) => {
                 })
                 return
             }
-            dispatch(move({
+
+            movePiece({
                 current_piece : data,
                 current_row : row,
                 current_box : box,
-            }))
+            })
         }
     }
     

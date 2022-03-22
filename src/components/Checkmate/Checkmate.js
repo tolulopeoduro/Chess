@@ -6,11 +6,7 @@ import WithModal from '../Modal/Modal'
 const Checkmate = (props) => {
 
     const check = useSelector(state => state.check)
-
-    useEffect(() => {
-        console.log(check)
-    }, [])
-
+    
     return (
         <div className={classes.mainContainer}>
             <div>

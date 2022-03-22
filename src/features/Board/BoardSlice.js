@@ -19,7 +19,8 @@ const initialState = {
     removed_pieces : {
       "A" : [],
       "B" : []
-    }
+    },
+    pawnMenu : null
 }
 
 export const BoardSlice = createSlice({
@@ -30,19 +31,20 @@ export const BoardSlice = createSlice({
         state.selection = action.payload
     },
     deselect: (state) => {
-      state.selection = null
+      state.selection = {side : 'A'}
     },
     move : (state , action) => {
-      const d = [...state.board]
-      const {piece , row , box} = state.selection 
-      const {current_piece , current_row , current_box} = action.payload
-      if (current_piece !== "") {
-        const a = {...state.removed_pieces}
-        const p = current_piece.split('_')[1] === "A" ? "B" : "A"
-        a[p].push(current_piece)
-      }
-      d[current_row][current_box] = piece
-      d[row][box] = ''
+      // const d = [...state.board]
+      // const {piece , row , box} = state.selection 
+      // const {current_piece , current_row , current_box} = action.payload
+      // if (current_piece !== "") {
+        // const a = {...state.removed_pieces}
+        // const p = current_piece.split('_')[1] === "A" ? "B" : "A"
+        // a[p].push(current_piece)
+      // }
+      // d[current_row][current_box] = piece
+      // d[row][box] = ''
+      state.board = action.payload
       state.selection = null
       state.turn = state.turn === 'A' ? 'B' : 'A'
       state.available_moves = null
@@ -52,12 +54,18 @@ export const BoardSlice = createSlice({
     },
     clearAvailableMoves : (state) => {
       state.available_moves = null
+    },
+    addRemovedPiece : (state , action) => {
+      state.removed_pieces = action.payload
+    },
+    setPawnMenu : (state , action) => {
+      state.pawnMenu = action.payload
     }
   },
 })
 
 export const { 
-  select , deselect , move , setAvailableMoves ,clearAvailableMoves
+  select , deselect , move , setAvailableMoves ,clearAvailableMoves , addRemovedPiece , setPawnMenu
   } = BoardSlice.actions
 
 export default BoardSlice.reducer

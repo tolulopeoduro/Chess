@@ -1,0 +1,30 @@
+.option {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px 8px;
+    transition: all 0.5s;
+}
+
+.option > img {
+    height: 50px;
+    transition: all 0.2;
+}
+
+.option:hover > img {
+    height: 60px;
+}
+
+.option > p {
+    text-transform: uppercase;
+}
+
+.option:hover {
+    height: 90px;
+    width: 90px;
+    background-color: rgba(165, 42, 42, 0.524);
+    cursor : pointer
+}
