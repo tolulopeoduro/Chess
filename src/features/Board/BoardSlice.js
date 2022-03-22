@@ -1,14 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-// const ar0and1 = [
-//   Array(8).fill(''),
-//   Array(8).fill('pawn_B')
-// ]
-// const twoToFive =  Array(4).fill(Array(8).fill(''))
-// const ar6to7 = [
-//   Array(8).fill('pawn_A'),
-//   Array(8).fill(''),
-// ]
 const ar0and1 = [
   ['rook_A' , 'knight_A' , 'bishop_A' , 'queen_A' , 'king_A' , 'bishop_A' , 'knight_A' , 'rook_A'],
   Array(8).fill('pawn_A')
@@ -28,7 +19,8 @@ const initialState = {
     removed_pieces : {
       "A" : [],
       "B" : []
-    }
+    },
+    pawnMenu : null
 }
 
 export const BoardSlice = createSlice({
@@ -39,7 +31,7 @@ export const BoardSlice = createSlice({
         state.selection = action.payload
     },
     deselect: (state) => {
-      state.selection = null
+      state.selection = {side : 'A'}
     },
     move : (state , action) => {
       // const d = [...state.board]
@@ -65,12 +57,15 @@ export const BoardSlice = createSlice({
     },
     addRemovedPiece : (state , action) => {
       state.removed_pieces = action.payload
+    },
+    setPawnMenu : (state , action) => {
+      state.pawnMenu = action.payload
     }
   },
 })
 
 export const { 
-  select , deselect , move , setAvailableMoves ,clearAvailableMoves , addRemovedPiece
+  select , deselect , move , setAvailableMoves ,clearAvailableMoves , addRemovedPiece , setPawnMenu
   } = BoardSlice.actions
 
 export default BoardSlice.reducer

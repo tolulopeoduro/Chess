@@ -16,7 +16,6 @@ const avoidChecks = (current_selection , init) => {
     const checks = store.getState().testcheck
     const avoided = checks.side === null && checks.moves.length === 0
     if (init) return avoided
-    console.log(avoided)
     avoided ? movePiece(current_selection) : alert(`${checks.side} is still on Check`)
 }
 
