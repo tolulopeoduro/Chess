@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const ar0and1 = [
   ['rook_A' , 'knight_A' , 'bishop_A' , 'queen_A' , 'king_A' , 'bishop_A' , 'knight_A' , 'rook_A'],
-  Array(8).fill('pawn_A')
+  Array(8).fill('')
 ]
 const twoToFive =  Array(4).fill(Array(8).fill(''))
 const ar6to7 = [
-  Array(8).fill('pawn_B'),
+  Array(8).fill(''),
   ['rook_B' , 'knight_B' , 'bishop_B' , 'queen_B' , 'king_B' , 'bishop_B' , 'knight_B' , 'rook_B']
 ]
 
@@ -14,13 +14,18 @@ const ar6to7 = [
 const initialState = {
     selection : null,
     board : [...ar0and1 , ...twoToFive , ...ar6to7 ],
-    turn : 'A',
+    turn : 'B',
     available_moves : null,
     removed_pieces : {
       "A" : [],
       "B" : []
     },
-    pawnMenu : null
+    pawnMenu : null,
+    gameState : {
+      isKingMoved : {A : false , B : false},
+      isRookOnemoved : {A : false , B : false},
+      isRookTwomoved : {A : false , B : false}
+    }
 }
 
 export const BoardSlice = createSlice({
@@ -34,16 +39,6 @@ export const BoardSlice = createSlice({
       state.selection = {side : 'A'}
     },
     move : (state , action) => {
-      // const d = [...state.board]
-      // const {piece , row , box} = state.selection 
-      // const {current_piece , current_row , current_box} = action.payload
-      // if (current_piece !== "") {
-        // const a = {...state.removed_pieces}
-        // const p = current_piece.split('_')[1] === "A" ? "B" : "A"
-        // a[p].push(current_piece)
-      // }
-      // d[current_row][current_box] = piece
-      // d[row][box] = ''
       state.board = action.payload
       state.selection = null
       state.turn = state.turn === 'A' ? 'B' : 'A'
@@ -60,12 +55,15 @@ export const BoardSlice = createSlice({
     },
     setPawnMenu : (state , action) => {
       state.pawnMenu = action.payload
+    },
+    setGameState : (state , action) => {
+      state.gameState = action.payload
     }
   },
 })
 
 export const { 
-  select , deselect , move , setAvailableMoves ,clearAvailableMoves , addRemovedPiece , setPawnMenu
+  select , deselect , move , setAvailableMoves ,clearAvailableMoves , addRemovedPiece , setPawnMenu , setGameState
   } = BoardSlice.actions
 
 export default BoardSlice.reducer

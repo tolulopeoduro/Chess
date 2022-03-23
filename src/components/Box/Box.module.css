@@ -9,9 +9,19 @@
     border : none;
 }
 
-.available {
+.available , .castle {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: rgb(255, 168, 5);
+}
+
+.castle {
+    background-color: rgb(47, 206, 255);
+}
+
+.target {
     animation: mymove 1s infinite;
-    box-sizing: border-box !important;
 }
 
 @keyframes mymove {

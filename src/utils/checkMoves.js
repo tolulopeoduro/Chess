@@ -142,6 +142,9 @@ const checkKingMoves = (data , row , box) => {
     const type = data.split('_')[1]
     const available_moves = []
     const b = store.getState().board.board
+    const {isKingMoved , isRookOnemoved , isRookTwomoved} = store.getState().board.gameState
+    const kingside_castle_condition = (b[row][5] === "" && b[row][6] === "") && (!isKingMoved[type] && !isRookTwomoved[type])
+    const queenside_castle_condition = (b[row][1] === "" && b[row][2] === "" && b[row][3] === "") && (!isKingMoved[type] && !isRookTwomoved[type])
     
     const checkValidity = (r , x) => {
         if (r > 7 || x > 7 || r < 0 || x < 0) return 'end'
@@ -165,6 +168,10 @@ const checkKingMoves = (data , row , box) => {
     checkValidity(row+1 , box)
     checkValidity(row , box+1)
     checkValidity(row, box-1)
+
+    kingside_castle_condition && available_moves.push({row : row , box : 6 , castle : true})
+    queenside_castle_condition && available_moves.push({row : row , box : 2 , castle : true})
+    
     
     store.dispatch(setAvailableMoves(available_moves))
 }

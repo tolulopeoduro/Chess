@@ -42,7 +42,7 @@ function App() {
       </div> 
       {(check.checkmate && messages.checkmate) && <Checkmate handleClose = {() => toggleMessages('checkmate' , false)}/>}
       {pawnMenu && <PawnTransformMenu/>}
-      <PlayerDetailsContainer player ="B" removed = {removed['B']} isLargeScreen/>  
+      <PlayerDetailsContainer player ="B" removed = {removed['B']} isLargeScreen/>
     </div>
   );
 }

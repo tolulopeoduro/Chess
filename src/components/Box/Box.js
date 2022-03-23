@@ -80,13 +80,19 @@ const Box = (props) => {
     }
     
     const is_available = available_moves?.some(p => p.row === row && p.box === box)
+    const is_castle = available_moves?.some(p => p.row === row && p.box === box && p.castle)
 
+    const opp = turn === 'A' ? 'B' : 'A'
 
     return (
-        <div className={cx(classes.box , {[classes.available] : is_available} )} onClick={handleClick} >
+        <div className={cx(classes.box , {[classes.target] : is_available && data.split('_')[1] === opp} )} onClick={handleClick} >
             {
             data !== '' ?
             <img src={require(`../../assets/images/board/${data}.PNG`)} height="100%" />
+            : is_available && !is_castle ? 
+            <div className={classes.available}></div>
+            : is_available && is_castle ? 
+            <div className={classes.castle}></div>
             : data
             }
         </div>
