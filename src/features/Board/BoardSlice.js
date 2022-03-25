@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const ar0and1 = [
   ['rook_A' , 'knight_A' , 'bishop_A' , 'queen_A' , 'king_A' , 'bishop_A' , 'knight_A' , 'rook_A'],
-  Array(8).fill('')
+  Array(8).fill('pawn_A')
 ]
 const twoToFive =  Array(4).fill(Array(8).fill(''))
 const ar6to7 = [
-  Array(8).fill(''),
+  Array(8).fill('pawn_B'),
   ['rook_B' , 'knight_B' , 'bishop_B' , 'queen_B' , 'king_B' , 'bishop_B' , 'knight_B' , 'rook_B']
 ]
 
@@ -14,7 +14,7 @@ const ar6to7 = [
 const initialState = {
     selection : null,
     board : [...ar0and1 , ...twoToFive , ...ar6to7 ],
-    turn : 'B',
+    turn : 'A',
     available_moves : null,
     removed_pieces : {
       "A" : [],

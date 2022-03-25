@@ -3,7 +3,7 @@ import { store } from "../store"
 import movement_alert from "./gamestateUtils"
 import setTestBoard from "./setTestBoard"
 
-const movePiece = (data) => {
+const movePiece = (data , castle) => {
 
     const {board} = store.getState().board
     const selection = store.getState().board.selection
@@ -30,7 +30,6 @@ const movePiece = (data) => {
         a[p] = b
         store.dispatch(addRemovedPiece(a))
     }
-
     store.dispatch(move(setTestBoard(selection , data)))
 
 }

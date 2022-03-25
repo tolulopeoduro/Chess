@@ -6,6 +6,7 @@ import classes from './Box.module.css'
 import cx from 'classnames'
 import avoid_checks from '../../utils/avoidChecks';
 import movePiece from '../../utils/Move';
+import kingside from '../../utils/castle';
 
 const Box = (props) => {
 
@@ -52,6 +53,13 @@ const Box = (props) => {
                 current_row : row,
                 current_box : box,
             }
+
+            if (is_castle) {
+                kingside(currentMove)
+                return
+            }
+
+
             if (selection.piece === 'pawn_A' && row ===7) {
                 dispatch(setPawnMenu({side : 'A' , currentMove , oncheck : check.side === turn}))
                 return 

@@ -1,7 +1,6 @@
 import { store } from "../store"
 
-const setMove = (selection , data) => {
-
+const setMove = (selection , data , castle) => {
     const board = store.getState().board.board
     const {piece , row , box} = selection
     const {current_piece , current_row , current_box} = data
@@ -15,6 +14,20 @@ const setMove = (selection , data) => {
     const b = [...c[row]]
     b[box] = ''
     c[row] = b
+
+    if (castle === 'kingside') {
+        const a = [...c[current_row]]
+        a[5] = `rook_${piece.split('_')[1]}`
+        a[7] = ''
+        c[current_row] = a
+    }
+    if (castle === 'queenside') {
+        const a = [...c[current_row]]
+        a[3] = `rook_${piece.split('_')[1]}`
+        a[0] = ''
+        c[current_row] = a
+    }
+
 
     return c
 }
