@@ -6,6 +6,7 @@ import classes from './Box.module.css'
 import cx from 'classnames'
 import avoid_checks from '../../utils/avoidChecks';
 import movePiece from '../../utils/Move';
+import kingside from '../../utils/castle';
 
 const Box = (props) => {
 
@@ -52,6 +53,13 @@ const Box = (props) => {
                 current_row : row,
                 current_box : box,
             }
+
+            if (is_castle) {
+                kingside(currentMove)
+                return
+            }
+
+
             if (selection.piece === 'pawn_A' && row ===7) {
                 dispatch(setPawnMenu({side : 'A' , currentMove , oncheck : check.side === turn}))
                 return 
@@ -80,13 +88,19 @@ const Box = (props) => {
     }
     
     const is_available = available_moves?.some(p => p.row === row && p.box === box)
+    const is_castle = available_moves?.some(p => p.row === row && p.box === box && p.castle)
 
+    const opp = turn === 'A' ? 'B' : 'A'
 
     return (
-        <div className={cx(classes.box , {[classes.available] : is_available} )} onClick={handleClick} >
+        <div className={cx(classes.box , {[classes.target] : is_available && data.split('_')[1] === opp} )} onClick={handleClick} >
             {
             data !== '' ?
             <img src={require(`../../assets/images/board/${data}.PNG`)} height="100%" />
+            : is_available && !is_castle ? 
+            <div className={classes.available}></div>
+            : is_available && is_castle ? 
+            <div className={classes.castle}></div>
             : data
             }
         </div>

@@ -20,7 +20,12 @@ const initialState = {
       "A" : [],
       "B" : []
     },
-    pawnMenu : null
+    pawnMenu : null,
+    gameState : {
+      isKingMoved : {A : false , B : false},
+      isRookOnemoved : {A : false , B : false},
+      isRookTwomoved : {A : false , B : false}
+    }
 }
 
 export const BoardSlice = createSlice({
@@ -34,16 +39,6 @@ export const BoardSlice = createSlice({
       state.selection = {side : 'A'}
     },
     move : (state , action) => {
-      // const d = [...state.board]
-      // const {piece , row , box} = state.selection 
-      // const {current_piece , current_row , current_box} = action.payload
-      // if (current_piece !== "") {
-        // const a = {...state.removed_pieces}
-        // const p = current_piece.split('_')[1] === "A" ? "B" : "A"
-        // a[p].push(current_piece)
-      // }
-      // d[current_row][current_box] = piece
-      // d[row][box] = ''
       state.board = action.payload
       state.selection = null
       state.turn = state.turn === 'A' ? 'B' : 'A'
@@ -60,12 +55,15 @@ export const BoardSlice = createSlice({
     },
     setPawnMenu : (state , action) => {
       state.pawnMenu = action.payload
+    },
+    setGameState : (state , action) => {
+      state.gameState = action.payload
     }
   },
 })
 
 export const { 
-  select , deselect , move , setAvailableMoves ,clearAvailableMoves , addRemovedPiece , setPawnMenu
+  select , deselect , move , setAvailableMoves ,clearAvailableMoves , addRemovedPiece , setPawnMenu , setGameState
   } = BoardSlice.actions
 
 export default BoardSlice.reducer
