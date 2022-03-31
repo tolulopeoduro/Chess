@@ -96,7 +96,7 @@ const Box = (props) => {
     const name = [piece , side].join('_')
 
     return (
-        <div className={cx(classes.box , {[classes.target] : is_available && data.split('_')[1] === opp} )} onClick={handleClick} >
+        <div className={cx(classes.box , {[classes.target] : is_available && data.split('_')[1] === opp} , 'box' )} onClick={handleClick} >
             {
             data !== '' ?
             <img className={data} src={require(`../../assets/images/board/${name}.PNG`)} height="100%" />

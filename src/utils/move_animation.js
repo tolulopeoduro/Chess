@@ -3,7 +3,7 @@ import * as $ from 'jquery'
 const animate_move = (data , piece , time) => {
 
     const {current_piece , current_row , current_box} = data
-    const target = document.getElementsByClassName('Row_row__OdnOd')[current_row].children[current_box]
+    const target = document.getElementsByClassName('row')[current_row].children[current_box]
 
     const topPos = target.getBoundingClientRect().top + window.scrollY;
     const leftPos = target.getBoundingClientRect().left + window.scrollX;
