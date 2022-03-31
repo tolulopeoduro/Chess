@@ -7,6 +7,7 @@ import WithModal from './components/Modal/Modal';
 import Checkmate from './components/Checkmate/Checkmate';
 import { useEffect, useState } from 'react';
 import PawnTransformMenu from './components/PawnTransformMenu/PawnTransformMenu'
+import GameStateControl from './components/GameStateControl/GameStateControl';
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
         <PlayerDetailsContainer player ="B" removed = {removed['B']}/>  
         </div>
         <Main/>
+        <GameStateControl/>
       </div> 
       {(check.checkmate && messages.checkmate) && <Checkmate handleClose = {() => toggleMessages('checkmate' , false)}/>}
       {pawnMenu && <PawnTransformMenu/>}

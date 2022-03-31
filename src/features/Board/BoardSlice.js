@@ -14,6 +14,8 @@ const ar6to7 = [
 const initialState = {
     selection : null,
     board : [...ar0and1 , ...twoToFive , ...ar6to7 ],
+    moves : 0,
+    move_in_view : 0,
     turn : 'A',
     available_moves : null,
     removed_pieces : {
@@ -25,7 +27,9 @@ const initialState = {
       isKingMoved : {A : false , B : false},
       isRookOnemoved : {A : false , B : false},
       isRookTwomoved : {A : false , B : false}
-    }
+    },
+    prev_moves : [[...ar0and1 , ...twoToFive , ...ar6to7 ]],
+    prev_removed_pieces : [{"A" : [] , "B" : []}]
 }
 
 export const BoardSlice = createSlice({
@@ -40,9 +44,13 @@ export const BoardSlice = createSlice({
     },
     move : (state , action) => {
       state.board = action.payload
+      state.moves += 1
+      state.prev_moves = [...state.prev_moves , action.payload]
+      state.prev_removed_pieces = [...state.prev_removed_pieces , state.removed_pieces]
       state.selection = null
       state.turn = state.turn === 'A' ? 'B' : 'A'
       state.available_moves = null
+      return state
     },
     setAvailableMoves : (state , action) => {
       state.available_moves = action.payload
@@ -58,12 +66,22 @@ export const BoardSlice = createSlice({
     },
     setGameState : (state , action) => {
       state.gameState = action.payload
+    },
+    setcurrentBoard : (state , action) => {
+      const {move_no , board , removed_pieces} = action.payload
+      return {...state , 
+        selection : null,
+        board : board,
+        moves : move_no,
+        removed_pieces : removed_pieces,
+        available_moves : null
+      }
     }
   },
 })
 
 export const { 
-  select , deselect , move , setAvailableMoves ,clearAvailableMoves , addRemovedPiece , setPawnMenu , setGameState
+  select , deselect , move , setAvailableMoves ,clearAvailableMoves , addRemovedPiece , setPawnMenu , setGameState , setcurrentBoard
   } = BoardSlice.actions
 
 export default BoardSlice.reducer

@@ -12,7 +12,7 @@ const Box = (props) => {
 
     const {t} = useTranslation()
 
-    const {selection , turn , available_moves} = useSelector(state => state.board)
+    const {selection , turn , available_moves , prev_moves , moves} = useSelector(state => state.board)
     const b = useSelector(state => state.board)
     const check = useSelector(state => state.check)
 
@@ -24,6 +24,7 @@ const Box = (props) => {
     const handleClick = () => {
 
         if (check.checkmate) return
+        if (moves < prev_moves.length -1) return
         
         if (!selection && turn !== data.split('_')[1]) return
         if (turn === data.split('_')[1] && selection) {

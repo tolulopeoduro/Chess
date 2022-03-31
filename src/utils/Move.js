@@ -37,6 +37,8 @@ const movePiece = (data , castle) => {
         store.dispatch(move(setTestBoard(selection , data)))
     } , 200)
 
+    console.log(selection , data)
+
 }
 
 export default movePiece
