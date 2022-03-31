@@ -92,11 +92,14 @@ const Box = (props) => {
 
     const opp = turn === 'A' ? 'B' : 'A'
 
+    const [piece , side]  = data.split('_')
+    const name = [piece , side].join('_')
+
     return (
         <div className={cx(classes.box , {[classes.target] : is_available && data.split('_')[1] === opp} )} onClick={handleClick} >
             {
             data !== '' ?
-            <img src={require(`../../assets/images/board/${data}.PNG`)} height="100%" />
+            <img className={data} src={require(`../../assets/images/board/${name}.PNG`)} height="100%" />
             : is_available && !is_castle ? 
             <div className={classes.available}></div>
             : is_available && is_castle ? 

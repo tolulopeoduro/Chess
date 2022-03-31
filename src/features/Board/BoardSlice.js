@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const ar0and1 = [
-  ['rook_A' , 'knight_A' , 'bishop_A' , 'queen_A' , 'king_A' , 'bishop_A' , 'knight_A' , 'rook_A'],
-  Array(8).fill('pawn_A')
+  ['rook_A_1' , 'knight_A_1' , 'bishop_A_1' , 'queen_A' , 'king_A' , 'bishop_A_2' , 'knight_A_2' , 'rook_A_2'],
+  ['pawn_A_1' , 'pawn_A_2' , 'pawn_A_3' , 'pawn_A_4' , 'pawn_A_5' , 'pawn_A_6' , 'pawn_A_7' , 'pawn_A_8']
 ]
 const twoToFive =  Array(4).fill(Array(8).fill(''))
 const ar6to7 = [
-  Array(8).fill('pawn_B'),
-  ['rook_B' , 'knight_B' , 'bishop_B' , 'queen_B' , 'king_B' , 'bishop_B' , 'knight_B' , 'rook_B']
+  ['pawn_B_1' , 'pawn_B_2' , 'pawn_B_3' , 'pawn_B_4' , 'pawn_B_5' , 'pawn_B_6' , 'pawn_B_7' , 'pawn_B_8'],
+  ['rook_B_1' , 'knight_B_1' , 'bishop_B_1' , 'queen_B' , 'king_B' , 'bishop_B_2' , 'knight_B_2' , 'rook_B_2']
 ]
 
 
