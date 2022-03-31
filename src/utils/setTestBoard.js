@@ -1,4 +1,5 @@
 import { store } from "../store"
+import animate_move from "./move_animation"
 
 const setMove = (selection , data , castle) => {
     const board = store.getState().board.board
