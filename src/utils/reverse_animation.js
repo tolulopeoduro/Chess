@@ -1,9 +1,7 @@
 import * as $ from 'jquery'
 
-const animate_move = (data , selection , time , reverse) => {
-    const {piece} = selection
-    const {current_row , current_box} = data
-    const target = document.getElementsByClassName('row')[current_row].children[current_box]
+const reverse_animation = (target_row , target_box , piece , time) => {
+    const target = document.getElementsByClassName('row')[target_row].children[target_box]
 
     const topPos = target.getBoundingClientRect().top + window.scrollY;
     const leftPos = target.getBoundingClientRect().left + window.scrollX;
@@ -19,4 +17,4 @@ const animate_move = (data , selection , time , reverse) => {
     })
 }
 
-export default animate_move
+export default reverse_animation

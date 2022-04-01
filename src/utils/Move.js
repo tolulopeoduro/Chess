@@ -1,4 +1,4 @@
-import { addRemovedPiece, move } from "../features/Board/BoardSlice"
+import { addMovement, addRemovedPiece, move } from "../features/Board/BoardSlice"
 import { store } from "../store"
 import movement_alert from "./gamestateUtils"
 import setTestBoard from "./setTestBoard"
@@ -32,12 +32,12 @@ const movePiece = (data , castle) => {
         a[p] = b
         store.dispatch(addRemovedPiece(a))
     }
-    animate_move(data , piece , 0.2)
+    animate_move(data , selection , 0.2)
     setTimeout(() => {
         store.dispatch(move(setTestBoard(selection , data)))
     } , 200)
 
-    console.log(selection , data)
+    store.dispatch(addMovement({selection , data , castle}))
 
 }
 
