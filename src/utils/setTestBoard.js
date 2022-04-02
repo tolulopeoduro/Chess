@@ -1,3 +1,4 @@
+import { addMovement } from "../features/Board/BoardSlice"
 import { store } from "../store"
 import animate_move from "./move_animation"
 
@@ -18,13 +19,13 @@ const setMove = (selection , data , castle) => {
 
     if (castle === 'kingside') {
         const a = [...c[current_row]]
-        a[5] = `rook_${piece.split('_')[1]}`
+        a[5] = `rook_${piece.split('_')[1]}_2`
         a[7] = ''
         c[current_row] = a
     }
     if (castle === 'queenside') {
         const a = [...c[current_row]]
-        a[3] = `rook_${piece.split('_')[1]}`
+        a[3] = `rook_${piece.split('_')[1]}_1`
         a[0] = ''
         c[current_row] = a
     }

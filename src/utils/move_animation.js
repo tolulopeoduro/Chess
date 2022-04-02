@@ -1,10 +1,13 @@
 import * as $ from 'jquery'
+import { changePiece } from '../features/Board/BoardSlice'
+import { store } from '../store'
 
-const animate_move = (data , selection , time , reverse) => {
+const animate_move = (data , selection , time) => {
     const {piece} = selection
+    
     const {current_row , current_box} = data
     const target = document.getElementsByClassName('row')[current_row].children[current_box]
-
+    
     const topPos = target.getBoundingClientRect().top + window.scrollY;
     const leftPos = target.getBoundingClientRect().left + window.scrollX;
     

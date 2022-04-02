@@ -5,8 +5,8 @@ import setTestBoard from "./setTestBoard"
 import * as $ from 'jquery'
 import animate_move from "./move_animation"
 
-const movePiece = (data , castle) => {
-
+const movePiece = (data , castle , old) => {
+    
     const {board} = store.getState().board
     const selection = store.getState().board.selection
     const {piece , row , box} = store.getState().board.selection
@@ -37,7 +37,7 @@ const movePiece = (data , castle) => {
         store.dispatch(move(setTestBoard(selection , data)))
     } , 200)
 
-    store.dispatch(addMovement({selection , data , castle}))
+    store.dispatch(addMovement({selection , data , castle , old}))
 
 }
 

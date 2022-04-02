@@ -54,6 +54,15 @@ const Box = (props) => {
                 current_row : row,
                 current_box : box,
             }
+            if (selection.piece.includes('pawn_A') && currentMove.current_row ===7) {
+                dispatch(setPawnMenu({side : 'A' , currentMove , oncheck : check.side === turn}))
+                return 
+            }
+
+            if (selection.piece.includes('pawn_B') && currentMove.current_row ===0) {
+                dispatch(setPawnMenu({side : 'B' , currentMove , oncheck : check.side === turn}))
+                return
+            }
 
             if (is_castle) {
                 kingside(currentMove)
@@ -61,15 +70,6 @@ const Box = (props) => {
             }
 
 
-            if (selection.piece === 'pawn_A' && row ===7) {
-                dispatch(setPawnMenu({side : 'A' , currentMove , oncheck : check.side === turn}))
-                return 
-            }
-
-            if (selection.piece === 'pawn_B' && row ===0) {
-                dispatch(setPawnMenu({side : 'B' , currentMove , oncheck : check.side === turn}))
-                return
-            }
 
             if (turn === check.side) {
                 avoid_checks({

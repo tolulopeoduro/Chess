@@ -1,11 +1,12 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { select, setPawnMenu } from '../../features/Board/BoardSlice'
+import { changePiece, select, setPawnMenu } from '../../features/Board/BoardSlice'
 import avoidChecks from '../../utils/avoidChecks'
 import movePiece from '../../utils/Move'
 import WithModal from '../Modal/Modal'
 import Option from '../Option.js/Option'
 import classes from './PawnTransformMenu.module.css'
+import Randomstring from 'random-string'
 
 const PawnTransformMenu = () => {
 
@@ -13,18 +14,23 @@ const PawnTransformMenu = () => {
     const pawnSide = useSelector(state => state.board.pawnMenu.side)
     const pawnMove = useSelector(state => state.board.pawnMenu.currentMove)
     const selection = useSelector(state => state.board.selection)
+    const board = useSelector(state => state.board.board)
 
     const dispatch = useDispatch()
 
     const handleClick = (piece) => {
-        dispatch(select({...selection, piece : `${piece}_${pawnSide}`}))
+
+        const newpiece = {...selection, piece : `${piece}_${pawnSide}_${Randomstring()}`}
+        
+        dispatch(changePiece(newpiece))
+        dispatch(select(newpiece))
         if (pawnMenu.oncheck) {
             avoidChecks(pawnMove)
             dispatch(setPawnMenu(null))
             return
         } 
-        movePiece({...pawnMove})
         dispatch(setPawnMenu(null))
+        setTimeout(() => movePiece({...pawnMove} , null , newpiece.piece) , 0)
     }
 
     return (
