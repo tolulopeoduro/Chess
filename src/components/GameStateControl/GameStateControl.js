@@ -19,8 +19,8 @@ const GameStateControl = () => {
             if (movements[moves]) {
 
                 const {selection , data , current_move , castle , old , rook_move} = movements[moves]
-                const {move_2 , selection_2} = rook_move
                 if (castle) {
+                    const {move_2 , selection_2} = rook_move
                     setTimeout(() => {
                         animate_move(current_move , selection , 0.2)
                         animate_move(move_2 , selection_2 , 0.3)
@@ -51,7 +51,7 @@ const GameStateControl = () => {
                     clear(data)
                 } , 300)
             }
-            animate_move(selection , selection , 0.2)
+            animate_move(data2 , selection , 0.2)
             setTimeout(() => {
                 dispatch(setcurrentBoard({move_no : m , board : prev_moves[m] , removed_pieces : prev_removed_pieces[m] }))
                 clear(data)
