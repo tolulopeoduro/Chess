@@ -12,7 +12,7 @@ const Box = (props) => {
 
     const {t} = useTranslation()
 
-    const {selection , turn , available_moves} = useSelector(state => state.board)
+    const {selection , turn , available_moves , prev_moves , moves} = useSelector(state => state.board)
     const b = useSelector(state => state.board)
     const check = useSelector(state => state.check)
 
@@ -24,6 +24,7 @@ const Box = (props) => {
     const handleClick = () => {
 
         if (check.checkmate) return
+        if (moves < prev_moves.length -1) return
         
         if (!selection && turn !== data.split('_')[1]) return
         if (turn === data.split('_')[1] && selection) {
@@ -53,6 +54,15 @@ const Box = (props) => {
                 current_row : row,
                 current_box : box,
             }
+            if (selection.piece.includes('pawn_A') && currentMove.current_row ===7) {
+                dispatch(setPawnMenu({side : 'A' , currentMove , oncheck : check.side === turn}))
+                return 
+            }
+
+            if (selection.piece.includes('pawn_B') && currentMove.current_row ===0) {
+                dispatch(setPawnMenu({side : 'B' , currentMove , oncheck : check.side === turn}))
+                return
+            }
 
             if (is_castle) {
                 kingside(currentMove)
@@ -60,15 +70,6 @@ const Box = (props) => {
             }
 
 
-            if (selection.piece === 'pawn_A' && row ===7) {
-                dispatch(setPawnMenu({side : 'A' , currentMove , oncheck : check.side === turn}))
-                return 
-            }
-
-            if (selection.piece === 'pawn_B' && row ===0) {
-                dispatch(setPawnMenu({side : 'B' , currentMove , oncheck : check.side === turn}))
-                return
-            }
 
             if (turn === check.side) {
                 avoid_checks({
@@ -96,7 +97,7 @@ const Box = (props) => {
     const name = [piece , side].join('_')
 
     return (
-        <div className={cx(classes.box , {[classes.target] : is_available && data.split('_')[1] === opp} )} onClick={handleClick} >
+        <div className={cx(classes.box , {[classes.target] : is_available && data.split('_')[1] === opp} , 'box' )} onClick={handleClick} >
             {
             data !== '' ?
             <img className={data} src={require(`../../assets/images/board/${name}.PNG`)} height="100%" />

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const ar0and1 = [
   ['rook_A_1' , 'knight_A_1' , 'bishop_A_1' , 'queen_A' , 'king_A' , 'bishop_A_2' , 'knight_A_2' , 'rook_A_2'],
-  ['pawn_A_1' , 'pawn_A_2' , 'pawn_A_3' , 'pawn_A_4' , 'pawn_A_5' , 'pawn_A_6' , 'pawn_A_7' , 'pawn_A_8']
+  ['pawn_A_1' , 'pawn_A_2' , 'pawn_A_3' , 'pawn_A_4' , 'pawn_A_5' , 'pawn_A_6' , 'pawn_A_7' , 'pawn_A_8'],
 ]
 const twoToFive =  Array(4).fill(Array(8).fill(''))
 const ar6to7 = [
@@ -14,6 +14,8 @@ const ar6to7 = [
 const initialState = {
     selection : null,
     board : [...ar0and1 , ...twoToFive , ...ar6to7 ],
+    moves : 0,
+    move_in_view : 0,
     turn : 'A',
     available_moves : null,
     removed_pieces : {
@@ -25,7 +27,10 @@ const initialState = {
       isKingMoved : {A : false , B : false},
       isRookOnemoved : {A : false , B : false},
       isRookTwomoved : {A : false , B : false}
-    }
+    },
+    prev_moves : [[...ar0and1 , ...twoToFive , ...ar6to7 ]],
+    prev_removed_pieces : [{"A" : [] , "B" : []}],
+    movements : []
 }
 
 export const BoardSlice = createSlice({
@@ -40,9 +45,13 @@ export const BoardSlice = createSlice({
     },
     move : (state , action) => {
       state.board = action.payload
+      state.moves += 1
+      state.prev_moves = [...state.prev_moves , action.payload]
+      state.prev_removed_pieces = [...state.prev_removed_pieces , state.removed_pieces]
       state.selection = null
       state.turn = state.turn === 'A' ? 'B' : 'A'
       state.available_moves = null
+      return state
     },
     setAvailableMoves : (state , action) => {
       state.available_moves = action.payload
@@ -58,12 +67,34 @@ export const BoardSlice = createSlice({
     },
     setGameState : (state , action) => {
       state.gameState = action.payload
+    },
+    setcurrentBoard : (state , action) => {
+      const {move_no , board , removed_pieces} = action.payload
+        state.selection = null
+        state.board = board
+        state.moves = move_no
+        state.removed_pieces = removed_pieces
+        state.available_moves = null
+    },
+    addMovement : (state , action) => {
+        return {
+          ...state,
+          movements : [...state.movements , action.payload]
+        }
+    },
+    changePiece : (state , action) => {
+      const {piece , row , box} = action.payload
+      // state.board[]
+      console.log(action.payload)
+      state.board[row][box] = piece
     }
   },
 })
 
 export const { 
-  select , deselect , move , setAvailableMoves ,clearAvailableMoves , addRemovedPiece , setPawnMenu , setGameState
+  select , deselect , move , setAvailableMoves ,clearAvailableMoves , 
+  addRemovedPiece , setPawnMenu , setGameState , setcurrentBoard , addMovement,
+  changePiece
   } = BoardSlice.actions
 
 export default BoardSlice.reducer
