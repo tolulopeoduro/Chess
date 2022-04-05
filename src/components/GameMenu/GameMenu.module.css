@@ -1,0 +1,51 @@
+.game_menu {
+    display: flex;
+    width: 100%;
+    align-self: flex-end;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    display: none;
+}
+
+.large {
+    display: flex;
+}
+
+.button_group {
+    display: flex;
+    overflow: hidden;
+    border-radius: 4px;
+    float : right;
+    justify-content: space-between;
+    align-self: flex-end;
+    min-width: 130px;
+}
+
+.button {
+    height: 40px;
+    width: 40px;
+    font-size: 40px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    border: 1px solid #c4c4c4;
+    background-color: #c4c4c4;
+    border-radius: 4px;
+}
+
+@media only screen and (max-width: 800px) {
+    .game_menu {
+        margin-top: 12px;
+        width: 80vw;
+        min-width: 200px;
+        margin: 0px auto;
+        display: flex;
+    }
+    .large {
+        display: none;
+    }
+}

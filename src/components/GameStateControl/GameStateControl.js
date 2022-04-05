@@ -5,6 +5,7 @@ import { store } from '../../store'
 import clear from '../../utils/clear'
 import animate_move from '../../utils/move_animation'
 import classes from './GameStateControl.module.css'
+import {Icon} from '@iconify/react'
 
 const GameStateControl = () => {
 
@@ -13,7 +14,7 @@ const GameStateControl = () => {
     const dispatch = useDispatch()
 
     const handle_click = (n) => {
-        console.log(movements)
+        
         const m = moves + n
         if (n === 1) {
             if (movements[moves]) {
@@ -41,7 +42,6 @@ const GameStateControl = () => {
             
             if (castle) {
                 const {selection_2} = rook_move
-                console.log(selection_2)
                 const rook_move_2 = {current_piece : '' , current_row : selection_2.row , current_box : selection_2.box}
 
                 animate_move(data2 , selection , 0.2)
@@ -61,9 +61,9 @@ const GameStateControl = () => {
     }
 
     return (
-        <div>
-            <button className = {classes.control_button} disabled ={moves === 0} onClick={() => handle_click(-1)}>{'<'}</button>
-            <button className = {classes.control_button} disabled = {prev_moves.length -1 === moves} onClick={() => handle_click(+1)}>{'>'}</button>
+        <div className={classes.button_group}>
+            <button className = {classes.control_button} disabled ={moves === 0} onClick={() => handle_click(-1)}><Icon icon='foundation:rewind'/></button>
+            <button className = {classes.control_button} disabled = {prev_moves.length -1 === moves} onClick={() => handle_click(+1)}><Icon icon='foundation:rewind'/></button>
         </div>
     )
 }

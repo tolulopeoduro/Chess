@@ -8,6 +8,7 @@ import Checkmate from './components/Checkmate/Checkmate';
 import { useEffect, useState } from 'react';
 import PawnTransformMenu from './components/PawnTransformMenu/PawnTransformMenu'
 import GameStateControl from './components/GameStateControl/GameStateControl';
+import GameMenu from './components/GameMenu/GameMenu';
 
 function App() {
 
@@ -33,18 +34,13 @@ function App() {
 
   return (
     <div className='App'>
-        <PlayerDetailsContainer player ="A" removed = {removed['A']} isLargeScreen/>
       <div>
-        <div>
-        <PlayerDetailsContainer player ="A" removed = {removed['A']}/>
-        <PlayerDetailsContainer player ="B" removed = {removed['B']}/>  
-        </div>
+        <PlayerDetailsContainer player ="A" removed = {removed['A']} isLargeScreen/>
+        <PlayerDetailsContainer player ="B" removed = {removed['B']} isLargeScreen/>
+        <GameMenu large_screen/>
+      </div>
         <Main/>
-        <GameStateControl/>
-      </div> 
-      {(check.checkmate && messages.checkmate) && <Checkmate handleClose = {() => toggleMessages('checkmate' , false)}/>}
-      {pawnMenu && <PawnTransformMenu/>}
-      <PlayerDetailsContainer player ="B" removed = {removed['B']} isLargeScreen/>
+        <GameMenu/>
     </div>
   );
 }

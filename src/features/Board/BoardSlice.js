@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { init } from 'i18next'
 
 const ar0and1 = [
   ['rook_A_1' , 'knight_A_1' , 'bishop_A_1' , 'queen_A' , 'king_A' , 'bishop_A_2' , 'knight_A_2' , 'rook_A_2'],
@@ -43,6 +44,9 @@ export const BoardSlice = createSlice({
     deselect: (state) => {
       state.selection = {side : 'A'}
     },
+    restart : (state) => {
+      return {...initialState}
+    },
     move : (state , action) => {
       state.board = action.payload
       state.moves += 1
@@ -84,8 +88,6 @@ export const BoardSlice = createSlice({
     },
     changePiece : (state , action) => {
       const {piece , row , box} = action.payload
-      // state.board[]
-      console.log(action.payload)
       state.board[row][box] = piece
     }
   },
@@ -94,7 +96,7 @@ export const BoardSlice = createSlice({
 export const { 
   select , deselect , move , setAvailableMoves ,clearAvailableMoves , 
   addRemovedPiece , setPawnMenu , setGameState , setcurrentBoard , addMovement,
-  changePiece
+  changePiece , restart
   } = BoardSlice.actions
 
 export default BoardSlice.reducer

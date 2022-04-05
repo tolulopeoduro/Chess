@@ -4,7 +4,6 @@ import { store } from '../store'
 
 const animate_move = (data , selection , time) => {
     const {piece} = selection
-    
     const {current_row , current_box} = data
     const target = document.getElementsByClassName('row')[current_row].children[current_box]
     
