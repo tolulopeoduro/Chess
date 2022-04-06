@@ -1,11 +1,11 @@
 
 .board {
-    height: 95vw;
-    width: 95vw;
+    height: 40vw;
+    width: 40vw;
     cursor: pointer;
     border: 1px solid black;
     box-sizing: border-box;
-    background-color: rgb(112, 77, 77);
+    background-color: rgb(0, 0, 0);
     background-image: url('../../assets/images/board/board.PNG');
     background-repeat: no-repeat;
     background-size: contain;
@@ -13,27 +13,17 @@
     border: 0px;
 }
 
-.board > div:nth-child(odd) > button:nth-child(even) {
-    background-color: gray;
-    outline: none;
-    border: none;
-}
-
-.board > div:nth-child(even) > button:nth-child(odd) {
-    background-color: gray;
-    outline: none;
-}
-
 .board > div > button {
     color: black;
     border: none;
-    
 }
 
-@media screen and (min-width : 600px) {
+@media only screen and (max-width: 800px) {
     .board {
-        width: 500px;
-        height: 500px;
-    }   
+        margin-top: 10px;
+        width: 80vw;
+        height: 80vw;
+        min-height: 200px;
+        min-width: 200px;
+    }
 }
-

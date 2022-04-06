@@ -6,11 +6,10 @@ const arrangeRemovedPieces = (ar , player) => {
             a[ar[i].split('_')[0]] += 1
         }
         const p = Object.keys(a).map(r => {
-            return {name : `${r}_${player}` , qty : a[r]}
+            return {name : `${r}_${player === 'A' ? 'B' : 'A'}` , qty : a[r]}
         })
         p.map(a => a.qty <1)
         return p
-        
 }
 
 export default arrangeRemovedPieces

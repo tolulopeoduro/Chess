@@ -5,29 +5,26 @@ import arrangeRemovedPieces from '../../utils/arrangeRemovedPieces'
 import RemovedItem from '../RemovedItem/RemovedItem'
 import { useSelector } from 'react-redux'
 import cx from 'classnames'
+import RemovedPieces from '../RemovedPieces/RemovedPieces'
 
 const PlayerDetailsContainer = (props) => {
 
     const {player , removed , isLargeScreen} = props
-    const ar = arrangeRemovedPieces(removed , player === "A" ? "B" : "A")
     const turn = useSelector(state => state.board.turn)
     const check = useSelector(state => state.check)
 
     const {t} = useTranslation()
     return (
-        <div className = {cx({[classes.playerContainer] : !isLargeScreen} , {[classes.large] : isLargeScreen} )}>
-            <div style={{flexDirection :player === "A" && "row-reverse"}}>
-                <img src ={require(`../../assets/images/board/king_${player}.PNG`)} height = '20px' />
-                <h1>Player {player}</h1> <div style={{visibility : player !== turn && "hidden"}} className={classes.playerBox}></div>
+        <div className = {classes.large}>
+            <div className={classes.player_name}>
+                <h1>PLAYER {player}</h1>&nbsp;
+                <div className={classes.player_piece}>
+                    <img src = {require(`../../assets/images/board/king_${player}.PNG`)} height ="100%" />
+                </div>&nbsp;
+                <div style={{visibility : turn  !== player && 'hidden'}} className={classes.player_turn}></div>
+                <div style={{visibility : check.side !== player && "hidden"}} className={classes.check_alert}>{check.checkmate ? 'CHECKMATE' : 'CHECK' }</div>
             </div>
-            <div style={{visibility : check.side !== player && "hidden"}} className={classes.checkAlert}>{check.checkmate ? 'CHECKMATE' : 'CHECK' }</div>
-            <div className={classes.removedPieces}>
-                {
-                    ar.map(r => 
-                        r.qty >0 && <RemovedItem data = {r} isLargeScreen = {isLargeScreen} />
-                    )
-                }
-            </div>
+            <RemovedPieces side ={player}/>
         </div>
     )
 }

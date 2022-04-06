@@ -1,14 +1,34 @@
-.control_button {
-    height: 30px;
-    width: 30px;
-    background-color: brown;
-    color: white;
-    outline: none;
-    margin: 8px 4px;
-    border: none;
+.button_group {
+    display: flex;
+    overflow: hidden;
     border-radius: 4px;
+    float : right;
+    justify-self: baseline;
+    align-self: flex-end;
 }
 
-.control_button:disabled {
-    opacity: 0.5;
+.control_button {
+    height: 40px;
+    width: 40px;
+    font-size: 40px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    border: 1px solid #c4c4c4;
+    background-color: #c4c4c4;
+    transition: all 0.3s;
+}
+
+.control_button:nth-child(2) > svg {
+    transform: rotate(180deg);
+}
+
+.control_button:hover {
+    background-color: #a79e9e;
+}
+
+.control_button:disabled:hover {
+    background-color: #c4c4c4;
 }
