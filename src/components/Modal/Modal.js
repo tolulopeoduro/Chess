@@ -1,6 +1,7 @@
 import React from 'react'
 import classes from './Modal.module.css'
 
+
 const WithModal = (WrappedComponent) => {
     return class extends React.Component{
         render() {

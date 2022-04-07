@@ -31,7 +31,12 @@ const initialState = {
     },
     prev_moves : [[...ar0and1 , ...twoToFive , ...ar6to7 ]],
     prev_removed_pieces : [{"A" : [] , "B" : []}],
-    movements : []
+    movements : [],
+    in_game_menu : {
+      restart : false,
+      quit : false,
+      main_menu : false
+    }
 }
 
 export const BoardSlice = createSlice({
@@ -89,6 +94,9 @@ export const BoardSlice = createSlice({
     changePiece : (state , action) => {
       const {piece , row , box} = action.payload
       state.board[row][box] = piece
+    },
+    toggle_menu : (state , action) => {
+      state.in_game_menu =  action.payload
     }
   },
 })
@@ -96,7 +104,7 @@ export const BoardSlice = createSlice({
 export const { 
   select , deselect , move , setAvailableMoves ,clearAvailableMoves , 
   addRemovedPiece , setPawnMenu , setGameState , setcurrentBoard , addMovement,
-  changePiece , restart
+  changePiece , restart , toggle_menu
   } = BoardSlice.actions
 
 export default BoardSlice.reducer
