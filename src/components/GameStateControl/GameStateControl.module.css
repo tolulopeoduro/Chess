@@ -8,8 +8,8 @@
 }
 
 .control_button {
-    height: 40px;
-    width: 40px;
+    height: 2rem;
+    width: 2rem;
     font-size: 40px;
     box-sizing: border-box;
     display: flex;
@@ -32,3 +32,11 @@
 .control_button:disabled:hover {
     background-color: #c4c4c4;
 }
+
+@media (min-width : 750px) and (min-height : 1000px ) {
+    .control_button {
+        height: 5rem;
+        width: 5rem;
+    }
+}
+

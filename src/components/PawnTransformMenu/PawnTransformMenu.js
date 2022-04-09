@@ -38,9 +38,6 @@ const PawnTransformMenu = () => {
             <div>
                 <h1>Checkmate</h1>
             </div>
-            <div>
-                <p>Change pawn to</p>
-            </div>
             <div className={classes.options}>
                 <Option side = {pawnSide} piece = 'queen' handleSelect = {() => handleClick('queen')} />
                 <Option side = {pawnSide} piece = 'rook' handleSelect = {() => handleClick('rook')} />

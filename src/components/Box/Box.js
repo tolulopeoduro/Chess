@@ -21,7 +21,8 @@ const Box = (props) => {
 
     const condition = turn === data.split('_')[1] || data === ""
     
-    const handleClick = () => {
+    const handleClick = (e) => {
+        e.preventDefault()
 
         if (check.checkmate) return
         if (moves < prev_moves.length -1) return
@@ -97,7 +98,7 @@ const Box = (props) => {
     const name = [piece , side].join('_')
 
     return (
-        <div className={cx(classes.box , {[classes.target] : is_available && data.split('_')[1] === opp} , 'box' )} onClick={handleClick} >
+        <div className={cx(classes.box , {[classes.target] : is_available && data.split('_')[1] === opp} , 'box' )} onClick={(e) => handleClick(e)} >
             {
             data !== '' ?
             <img className={data} src={require(`../../assets/images/board/${name}.PNG`)} height="100%" />

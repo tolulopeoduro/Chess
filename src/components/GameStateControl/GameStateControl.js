@@ -9,7 +9,8 @@ import {Icon} from '@iconify/react'
 
 const GameStateControl = () => {
 
-    const {board , prev_moves , moves , prev_removed_pieces , movements} = useSelector(state => state.board)
+    const boardState = useSelector(state => state.board)
+    const {board , prev_moves , moves , prev_removed_pieces , movements} = boardState
 
     const dispatch = useDispatch()
 
@@ -63,7 +64,7 @@ const GameStateControl = () => {
     return (
         <div className={classes.button_group}>
             <button className = {classes.control_button} disabled ={moves === 0} onClick={() => handle_click(-1)}><Icon icon='foundation:rewind'/></button>
-            <button className = {classes.control_button} disabled = {prev_moves.length -1 === moves} onClick={() => handle_click(+1)}><Icon icon='foundation:rewind'/></button>
+            <button className = {classes.control_button} disabled = {prev_moves?.length -1 === moves} onClick={() => handle_click(+1)}><Icon icon='foundation:rewind'/></button>
         </div>
     )
 }

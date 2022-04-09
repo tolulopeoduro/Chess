@@ -1,0 +1,19 @@
+.restart {
+    background-color: #c4c4c4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 200px;
+    padding: 20px;
+}
+
+.restart > p {
+    text-align: center;
+    padding: 20;
+}
+
+.restart > div> button {
+    min-width: 40px;
+    max-width: 80px;
+}
