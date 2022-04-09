@@ -14,12 +14,10 @@ const Main = () => {
 
     const dispatch = useDispatch()
     
-    const selection = useSelector(state => state.board.selection)
-    const board  = useSelector(state => state.board.board)
+    const board  = useSelector(state => state.board )
+    const {selection , turn , pawnMenu , in_game_menu} = board
     const check = useSelector(state => state.check)
-    const turn = useSelector(state => state.board.turn)
-    const pawnMenu = useSelector(state => state.board.pawnMenu)
-    const in_game_menu = useSelector(state => state.board.in_game_menu)
+    const players = useSelector(state => state.players)
 
     useEffect(() =>
      {
@@ -41,6 +39,11 @@ const Main = () => {
         check.side && findAllMoves(check.side)
     }, [check])
 
+    useEffect(() => {
+        localStorage.setItem('board' , JSON.stringify(board))
+        localStorage.setItem('players' , JSON.stringify(players))
+    } , [board , players])
+
     const [messages , setMessages] = useState({
         check : false,
         checkmate : false,
@@ -50,18 +53,18 @@ const Main = () => {
     return (
         <div className={classes.board}>
             {
-                board?.map((row , index) => (
+                board.board?.map((row , index) => (
                     <Row key = {index} row = {index} data ={row} />
                 ))
             }
             {check.checkmate && messages.checkmate ? <Checkmate handleClose = {() => setMessages({...messages , checkmate : false })}/> : null}
             {pawnMenu && <PawnTransformMenu/>}
             {
-                in_game_menu.restart ? <RestartPrompt 
+                in_game_menu?.restart ? <RestartPrompt 
                 message = 'ARE YOU SURE YOU WANT TO RESART' onAccept={() => dispatch(restart())}
                 onDecline = {() => dispatch(toggle_menu({...in_game_menu , restart : false}))} 
                 /> :
-                in_game_menu.quit ? <RestartPrompt 
+                in_game_menu?.quit ? <RestartPrompt 
                 message = 'FORFEIT GAME?' onAccept={() => dispatch(restart())}
                 onDecline = {() => dispatch(toggle_menu({...in_game_menu , quit : false}))} 
                 /> : null

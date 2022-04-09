@@ -5,9 +5,9 @@ import RemovedItem from '../RemovedItem/RemovedItem'
 import classes from './RemovedPieces.module.css'
 
 const RemovedPieces = (props) => {
-    const {side} = props
-    const removedPieces = useSelector(state => state.board.removed_pieces[side])
-    const arranged_list = arrangeRemovedPieces(removedPieces , side)
+  const {side} = props
+  const removedPieces = useSelector(state => state.board.removed_pieces[side])
+  const arranged_list = arrangeRemovedPieces(removedPieces , side)
 
   return (
     <div className={classes.removedPieces}>

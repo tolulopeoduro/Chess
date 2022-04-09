@@ -12,12 +12,13 @@ const PlayerDetailsContainer = (props) => {
     const {player , removed , isLargeScreen} = props
     const turn = useSelector(state => state.board.turn)
     const check = useSelector(state => state.check)
+    const playerDetail = useSelector(state => state.players[player])
 
     const {t} = useTranslation()
     return (
         <div className = {classes.large}>
             <div className={classes.player_name}>
-                <h1>PLAYER {player}</h1>&nbsp;
+                <h1>{playerDetail.name}</h1>&nbsp;
                 <div className={classes.player_piece}>
                     <img src = {require(`../../assets/images/board/king_${player}.PNG`)} height ="100%" />
                 </div>&nbsp;

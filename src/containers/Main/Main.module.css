@@ -1,29 +1,37 @@
-
 .board {
-    height: 40vw;
-    width: 40vw;
-    cursor: pointer;
-    border: 1px solid black;
-    box-sizing: border-box;
-    background-color: rgb(0, 0, 0);
+    width: 20rem;
+    height: 20rem;
     background-image: url('../../assets/images/board/board.PNG');
-    background-repeat: no-repeat;
+    background-position: center;
     background-size: contain;
-    border-radius: 4px;
-    border: 0px;
+    background-color: #000;
 }
 
-.board > div > button {
-    color: black;
-    border: none;
-}
-
-@media only screen and (max-width: 800px) {
+@media (min-width : 900px) and (min-height : 600px ) {
     .board {
-        margin-top: 10px;
-        width: 80vw;
-        height: 80vw;
-        min-height: 200px;
-        min-width: 200px;
+        height: 30rem;
+        width: 30rem;
     }
-}
+  }
+
+  @media (min-width : 750px) and (min-height : 1000px ) {
+      .board {
+        height: 80vw;
+        width: 80vw;
+      }
+  }
+
+  @media (min-width : 650px) and (max-height : 400px ) {
+    .board {
+        height: 300px;
+        width: 300px;
+      }
+  }
+
+
+  @media (min-width : 1200px) and (min-height : 800px ) {
+      .board {
+          height: 40vw;
+          width: 40vw;
+      }
+  }

@@ -35,7 +35,7 @@ const initialState = {
     in_game_menu : {
       restart : false,
       quit : false,
-      main_menu : false
+      main_menu : true
     }
 }
 
@@ -97,14 +97,15 @@ export const BoardSlice = createSlice({
     },
     toggle_menu : (state , action) => {
       state.in_game_menu =  action.payload
-    }
+    },
+    resume : (state , action) => action.payload
   },
 })
 
 export const { 
   select , deselect , move , setAvailableMoves ,clearAvailableMoves , 
   addRemovedPiece , setPawnMenu , setGameState , setcurrentBoard , addMovement,
-  changePiece , restart , toggle_menu
+  changePiece , restart , toggle_menu , resume
   } = BoardSlice.actions
 
 export default BoardSlice.reducer

@@ -1,0 +1,71 @@
+.home {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    height: 10rem;
+    font-size: 3rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-family: sans-serif;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 200px;
+    width: 20rem;
+}
+
+.menu > button , .setup_buttons > button {
+    height: 3rem;
+    width: 8rem;
+    border: 1px solid #c4c4c4;
+    background-color: #c4c4c4;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.menu > button:hover {
+    color: #fff;
+    height: 3.4rem;
+    width: 8.8rem;
+}
+
+
+.setup {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 200px;
+    width: 20rem;
+}
+
+.setup > input {
+    width: 100%;
+    height: 3rem;
+    outline: none;
+    font-size: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.setup_buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

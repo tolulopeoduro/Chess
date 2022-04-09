@@ -2,19 +2,24 @@ import logo from './logo.svg';
 import './App.css';
 import Main from './containers/Main/Main';
 import PlayerDetailsContainer from './components/PlayerDetailsContainer/PlayerDetailsContainer';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import WithModal from './components/Modal/Modal';
 import Checkmate from './components/Checkmate/Checkmate';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PawnTransformMenu from './components/PawnTransformMenu/PawnTransformMenu'
 import GameStateControl from './components/GameStateControl/GameStateControl';
 import GameMenu from './components/GameMenu/GameMenu';
+import { resume } from './features/Board/BoardSlice';
+import { load } from './features/Players/PlayerSlice';
 
 function App() {
 
   const removed = useSelector(state => state.board.removed_pieces)
   const check = useSelector(state => state.check)
   const pawnMenu = useSelector(state => state.board.pawnMenu)
+  const savedData = JSON.parse(localStorage.getItem('board'))
+  const savedNames = JSON.parse(localStorage.getItem('players'))
+  const dispatch = useDispatch()
 
   const [messages , setMessages] = useState({
     check : false,
@@ -32,16 +37,38 @@ function App() {
     check.checkmate && toggleMessages('checkmate' , true)
   } , [check])
 
+  useEffect(() => {
+    savedData && dispatch(resume(savedData))
+    savedNames && dispatch(load(savedNames))
+  } , [])
+
   return (
-    <div className='App'>
+    <React.Fragment>
+    <div className='App sm'>
       <div>
         <PlayerDetailsContainer player ="A" removed = {removed['A']} isLargeScreen/>
+      </div>
+      <div>
+        <Main/>
+        <GameMenu/>
+      </div>
+      <div>
+        <PlayerDetailsContainer player ="B" removed = {removed['B']} isLargeScreen/>
+      </div>
+    </div>
+
+    <div className='App lg'>
+      <div>
+      <PlayerDetailsContainer player ="A" removed = {removed['A']} isLargeScreen/>
         <PlayerDetailsContainer player ="B" removed = {removed['B']} isLargeScreen/>
         <GameMenu large_screen/>
       </div>
-        <Main/>
-        <GameMenu/>
+        <div>
+          <Main/>
+          <GameMenu/>
+        </div>
     </div>
+    </React.Fragment>
   );
 }
 
