@@ -9,6 +9,7 @@ import checkMoves, { clearMoves } from '../../utils/checkMoves';
 import findAllPieces from '../../utils/findAllPieces';
 import findAllMoves from '../../utils/findCheckMate';
 import classes from './Main.module.css'
+import computer from '../../computer/computer'
 
 const Main = () => {
 
@@ -28,6 +29,7 @@ const Main = () => {
     }, [selection])
 
     useEffect(() => {
+        computer(turn)
         findAllPieces(turn === 'A' ? 'B' : 'A')
     } , [turn])
 

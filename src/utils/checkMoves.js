@@ -2,21 +2,21 @@ import { setAvailableMoves , clearAvailableMoves } from "../features/Board/Board
 import { store } from "../store"
 
 const state = store.getState()
-const checkMoves = (data , row , box) => {
+const checkMoves = (data , row , box , computer) => {
     const piece = data.split('_')[0]
     !data && store.dispatch(setAvailableMoves(null))
-    piece === 'pawn' && checkPawnMoves(data , row , box)
-    piece === 'knight' && checkKnightMoves(data , row , box)
-    piece === 'rook' && checkRookMoves(data , row , box)
-    piece === 'bishop' && checkBishopMoves(data , row , box)
-    piece === 'queen' && checkQueenMoves(data , row , box)
-    piece === 'king' && checkKingMoves(data , row , box)
+    if (piece === 'pawn') return checkPawnMoves(data , row , box , computer)
+    if (piece === 'knight') return checkKnightMoves(data , row , box , computer)
+    if (piece === 'rook') return checkRookMoves(data , row , box , computer)
+    if (piece === 'bishop') return checkBishopMoves(data , row , box , computer)
+    if (piece === 'queen') return checkQueenMoves(data , row , box , computer)
+    if (piece === 'king') return checkKingMoves(data , row , box , computer)
     
 }
 
 export const clearMoves = store.dispatch(clearAvailableMoves())
 
-const checkPawnMoves = (data , row , box) => {
+const checkPawnMoves = (data , row , box , computer) => {
     const type = data.split('_')[1]
     const opp = type === 'A' ? 'B' : 'A'
     const available_moves = []
@@ -35,10 +35,15 @@ const checkPawnMoves = (data , row , box) => {
     if(B[r][c]?.split('_')[1] === opp ) {
         available_moves.push({row : r , box : c })
     }
+
+    if (computer) {
+        return available_moves
+    }
+
     store.dispatch(setAvailableMoves(available_moves))
 }
 
-const checkKnightMoves = (data , row , box ) => {
+const checkKnightMoves = (data , row , box , computer ) => {
     const type = data.split('_')[1]
     const available_moves = []
     const b = store.getState().board.board
@@ -53,10 +58,15 @@ const checkKnightMoves = (data , row , box ) => {
         {row : row-1 , box : box+2} , {row : row-1 , box : box-2} , {row : row+1 , box : box+2} , {row : row+1 , box : box-2}
     ]
     for (let i = 0 ; i < p.length ; i++) {checkValidity(p[i].row , p[i].box)}
+
+    if (computer) {
+        return available_moves
+    }
+
     store.dispatch(setAvailableMoves(available_moves))
 }
 
-const checkRookMoves = (data , row , box) => {
+const checkRookMoves = (data , row , box , computer) => {
     const type = data.split('_')[1]
     const available_moves = []
     const b = store.getState().board.board
@@ -78,10 +88,15 @@ const checkRookMoves = (data , row , box) => {
     for (let i = row-1; i >= 0; i-- ) {if (checkValidity(i , box)) break}
     for (let i = box+1 ; i < 8; i++) {if(checkValidity(row , i))break}
     for (let i = box-1; i >= 0; i-- ) {if(checkValidity(row , i))break}
+
+    if (computer) {
+        return available_moves
+    }
+
     store.dispatch(setAvailableMoves(available_moves))
 }
 
-const checkBishopMoves = (data , row , box) => {
+const checkBishopMoves = (data , row , box , computer) => {
     const type = data.split('_')[1]
     const available_moves = []
     const b = store.getState().board.board
@@ -104,10 +119,15 @@ const checkBishopMoves = (data , row , box) => {
     for (let i = 0; i <= 8; i++ ) {if (checkValidity(row+1+i , box-1-i)) break}
     for (let i = 0; i <= 8; i++ ) {if (checkValidity(row+1+i , box+1+i)) break}
     
+
+    if (computer) {
+        return available_moves
+    }
+
     store.dispatch(setAvailableMoves(available_moves))
 }
 
-const checkQueenMoves = (data , row , box) => {
+const checkQueenMoves = (data , row , box , computer) => {
     const type = data.split('_')[1]
     const available_moves = []
     const b = store.getState().board.board
@@ -135,10 +155,15 @@ const checkQueenMoves = (data , row , box) => {
     for (let i = 0; i <= 8; i++ ) {if (checkValidity(row , box+1+i)) break}
     for (let i = 0; i <= 8; i++ ) {if (checkValidity(row, box-1-i)) break}
     
+
+    if (computer) {
+        return available_moves
+    }
+
     store.dispatch(setAvailableMoves(available_moves))
 }
 
-const checkKingMoves = (data , row , box) => {
+const checkKingMoves = (data , row , box , computer) => {
     const type = data.split('_')[1]
     const available_moves = []
     const b = store.getState().board.board
@@ -173,6 +198,11 @@ const checkKingMoves = (data , row , box) => {
     queenside_castle_condition && available_moves.push({row : row , box : 2 , castle : true})
     
     
+
+    if (computer) {
+        return available_moves
+    }
+
     store.dispatch(setAvailableMoves(available_moves))
 }
 
