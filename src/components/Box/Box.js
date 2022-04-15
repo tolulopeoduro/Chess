@@ -18,11 +18,14 @@ const Box = (props) => {
 
     const dispatch = useDispatch()
     const {index , data , row , box } = props
+    const players = useSelector(state => state.players)
 
     const condition = turn === data.split('_')[1] || data === ""
     
     const handleClick = (e) => {
         e.preventDefault()
+
+        if (turn === 'A' && players['A'].isComputer) return
 
         if (check.checkmate) return
         if (moves < prev_moves.length -1) return

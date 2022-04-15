@@ -5,11 +5,11 @@ import setTestBoard from "./setTestBoard"
 import * as $ from 'jquery'
 import animate_move from "./move_animation"
 
-const movePiece = (data , castle , old) => {
+const movePiece = (data , castle , old , computer_selection) => {
     
     const {board} = store.getState().board
-    const selection = store.getState().board.selection
-    const {piece , row , box} = store.getState().board.selection
+    const selection = computer_selection || store.getState().board.selection
+    const {piece , row , box} = selection
     const {current_piece , current_row , current_box} = data
     const gameState = store.getState().board.gameState
     const {isKingMoved , isRookOnemoved , isRookTwomoved} = gameState

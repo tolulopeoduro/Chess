@@ -11,15 +11,18 @@ import GameStateControl from './components/GameStateControl/GameStateControl';
 import GameMenu from './components/GameMenu/GameMenu';
 import { resume } from './features/Board/BoardSlice';
 import { load } from './features/Players/PlayerSlice';
+import computer from './computer/computer';
 
 function App() {
 
+  const {board , turn } = useSelector(state => state.board)
   const removed = useSelector(state => state.board.removed_pieces)
   const check = useSelector(state => state.check)
   const pawnMenu = useSelector(state => state.board.pawnMenu)
   const savedData = JSON.parse(localStorage.getItem('board'))
   const savedNames = JSON.parse(localStorage.getItem('players'))
   const dispatch = useDispatch()
+  const players = useSelector(state => state.players)
 
   const [messages , setMessages] = useState({
     check : false,
@@ -32,6 +35,12 @@ function App() {
     a[m] = bool
     setMessages(a)
   }
+
+  useEffect(() => {
+    if (turn === 'A' && players['A'].isComputer) {
+      computer(turn)
+    }
+  } , [turn])
 
   useEffect(()=> {
     check.checkmate && toggleMessages('checkmate' , true)

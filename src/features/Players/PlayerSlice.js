@@ -31,12 +31,12 @@ export const PlayerSlice = createSlice({
         setSinglePlayer : (state , action) => {
             state.A = {
                 ...state.A,
-                name : action.payload[0] !== '' ? action.payload[0] : 'PLAYER A' ,
+                name : 'COMPUTER',
+                isComputer : true
             }
             state.B = {
                 ...state.B,
-                name : 'COMPUTER',
-                isComputer : true
+                name : action.payload[0] !== '' ? action.payload : 'PLAYER A' ,
             }
         },
         load : (state , action) => {

@@ -29,9 +29,9 @@ const Main = () => {
     }, [selection])
 
     useEffect(() => {
-        computer(turn)
         findAllPieces(turn === 'A' ? 'B' : 'A')
     } , [turn])
+
 
     useEffect(() => {
         if (check.checkmate) {
