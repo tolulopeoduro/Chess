@@ -38,7 +38,7 @@ function App() {
 
   useEffect(() => {
     if (turn === 'A' && players['A'].isComputer) {
-      computer(turn)
+      setTimeout(() => computer(turn) , 1000)
     }
   } , [turn])
 

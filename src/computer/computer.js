@@ -24,8 +24,9 @@ const computer = (side ) => {
                     const data = {current_piece : B[row][box] , current_row : row , current_box : box}
                     all_moves.push({selection , data})
                     const current_score = minimax(setMove(selection , data ) , side)
-                    if (best_move_score === null) {
+                    if (!best_move_score) {
                         best_move_score = current_score
+                        best_move = {selection , data}
                     }
                     if (current_score > best_move_score ) {
                         best_move_score = current_score
@@ -35,7 +36,6 @@ const computer = (side ) => {
             }
         }
     }
-        console.log(best_move)
         const {data , selection} = best_move
         movePiece(data , null , null , selection)
 
