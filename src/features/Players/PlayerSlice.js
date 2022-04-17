@@ -21,7 +21,7 @@ export const PlayerSlice = createSlice({
         setPlayers : (state , action) => {
             state.A = {
                 ...state.A,
-                name : action.payload[0] !== '' ? action.payload[0] : 'PLAYER A' ,
+                name : action.payload[0] !== '' ? action.payload[0] : 'PLAYER A' , isComputer : false
             }
             state.B = {
                 ...state.B,
@@ -36,7 +36,7 @@ export const PlayerSlice = createSlice({
             }
             state.B = {
                 ...state.B,
-                name : action.payload[0] !== '' ? action.payload : 'PLAYER A' ,
+                name : action.payload[1] !== '' ? action.payload : 'PLAYER A' ,
             }
         },
         load : (state , action) => {

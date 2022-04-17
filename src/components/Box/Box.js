@@ -48,9 +48,9 @@ const Box = (props) => {
                 box : box
             }))
         } 
-        if (selection.row === row && selection.box === box)  {
-            dispatch(select(null))
-        }
+        // if (selection.row === row && selection.box === box)  {
+        //     dispatch(select(null))
+        // }
 
         if (selection && is_available) {
             const currentMove = {
