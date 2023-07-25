@@ -4,9 +4,6 @@ import {useNavigate} from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { load, setPlayers } from '../../features/Players/PlayerSlice'
 import {restart, resume} from '../../features/Board/BoardSlice'
-import { store } from '../../store'
-
-
 
 const Home = () => {
     const [game_settings , set_game_settings] = useState(false)
@@ -17,14 +14,37 @@ const Home = () => {
 
     const navigate = useNavigate()
 
+		const p1 = {
+			name : "PLAYER 1",
+			wins: 0,
+			isComputer : false
+		}
+		const p2 = {
+			name : "PLAYER 1",
+			wins: 0,
+			isComputer : false
+		}
+
+		const computer = {
+			name : "COMPUTER",
+			wins : 0,
+			isComputer : true
+		}
+		
     const start = (pvp) => {
         if (pvp) {
-            dispatch(setPlayers([player1 , player2]))
-            dispatch(restart())
-            setTimeout(() => navigate('/game') , 0)
-            localStorage.setItem('board' , null)
-            localStorage.setItem('players' , null)
-        }
+					dispatch(setPlayers([p1, p2]))
+					dispatch(restart())
+					setTimeout(() => navigate('/game') , 0)
+					localStorage.setItem('board' , null)
+					localStorage.setItem('players' , null)
+				} else {
+					dispatch(setPlayers([1 , computer]))
+					dispatch(restart())
+					setTimeout(() => navigate('/game') , 0)
+					localStorage.setItem('board' , null)
+					localStorage.setItem('players' , null)
+				}
     }
     
     const savedData = JSON.parse(localStorage.getItem('board'))
@@ -56,7 +76,7 @@ const Home = () => {
             :
             <div className={classes.menu}>
                 {savedData && <button onClick={() => resumeGame()}>RESUME</button>}
-                <button onClick={() => navigate('/game')}>1 PLAYER</button> 
+                <button onClick={() => start(false)}>1 PLAYER</button> 
                 <button onClick={() => set_game_settings(true)}>2 PLAYER</button>
             </div>
             }

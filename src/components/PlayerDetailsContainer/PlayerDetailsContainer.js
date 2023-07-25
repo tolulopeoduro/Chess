@@ -20,7 +20,7 @@ const PlayerDetailsContainer = (props) => {
             <div className={classes.player_name}>
                 <h1>{playerDetail.name}</h1>&nbsp;
                 <div className={classes.player_piece}>
-                    <img src = {require(`../../assets/images/board/king_${player}.PNG`)} height ="100%" />
+                    <img src = {require(`../../assets/images/board/king_${player}.svg`)} height ="100%" />
                 </div>&nbsp;
                 <div style={{visibility : turn  !== player && 'hidden'}} className={classes.player_turn}></div>
                 <div style={{visibility : check.side !== player && "hidden"}} className={classes.check_alert}>{check.checkmate ? 'CHECKMATE' : 'CHECK' }</div>

@@ -101,7 +101,7 @@ const Box = (props) => {
         <div className={cx(classes.box , {[classes.target] : is_available && data.split('_')[1] === opp} , 'box' )} onClick={(e) => handleClick(e)} >
             {
             data !== '' ?
-            <img className={data} src={require(`../../assets/images/board/${name}.PNG`)} height="100%" />
+            <img className={data} src={require(`../../assets/images/board/${name}.svg`)} height="100%" />
             : is_available && !is_castle ? 
             <div className={classes.available}></div>
             : is_available && is_castle ? 

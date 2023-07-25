@@ -21,11 +21,11 @@ export const PlayerSlice = createSlice({
         setPlayers : (state , action) => {
             state.A = {
                 ...state.A,
-                name : action.payload[0] !== '' ? action.payload[0] : 'PLAYER A' ,
+                ...action.payload[0]
             }
             state.B = {
                 ...state.B,
-                name : action.payload[1] !== '' ? action.payload[1] : 'PLAYER B' 
+								...action.payload[1]
             }
         },
         load : (state , action) => {

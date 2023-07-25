@@ -18,7 +18,7 @@ const RemovedItem = (props) => {
 
   return (
     <div className={classes.large}>
-        <img className={cx({[classes.added] : added })} src={require(`../../assets/images/board/${name}.PNG`)}/>
+        <img className={cx({[classes.added] : added })} src={require(`../../assets/images/board/${name}.svg`)}/>
         <p style={{visibility : qty < 2 && 'hidden'}}>{qty > 1 && `${qty}`}</p>
     </div>
   )
