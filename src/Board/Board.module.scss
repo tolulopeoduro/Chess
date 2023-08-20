@@ -1,0 +1,79 @@
+.board {
+	height: 90vh;
+	width: 90vh;
+	background-color: var(--board_edges);
+	border-radius: 0.25rem;
+}
+
+.board_top, .board_bottom {
+	height: 5%;
+	width: 100%;
+
+	padding: 0 5%;
+}
+
+.board_left, .board_right {
+	width: 5%;
+	height: 100%;
+	flex-direction: column;
+}
+
+.board_left, .board_right, .board_top, .board_bottom {
+	display: flex;
+	justify-content: space-between;
+	> span {
+		height: 100%;
+		width: 100%;
+		text-transform: uppercase;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #fff;
+	}
+}
+
+
+.board_middle {
+	height: 90%;
+	width: 100%;
+	display: flex;
+}
+
+.box {
+	height: 100%;
+	width: 90%;
+	overflow: hidden;
+	flex-direction: row;
+	display: flex;
+	flex-wrap: wrap;
+	border-radius: 0.25rem;
+}
+
+.square {
+	height: 12.5%;
+	width: 12.5%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	> svg {
+		height: 75%;
+		position: absolute;
+		max-height: 3.5rem;
+	}
+
+	> .A {
+		color: var(--pieces_a);
+	}
+	> B {
+		color: var(--pieces_b);
+	}
+	
+}
+
+.black {
+	background-color: var(--black_square);
+}
+.white {
+	background-color: var(--white_square);
+}
