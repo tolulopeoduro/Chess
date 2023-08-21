@@ -4,7 +4,7 @@ import classNames from "classnames"
 import { Icon } from "@iconify/react"
 import Pawn from "../pieces/Pawn"
 import { useSelector } from "react-redux"
-import { parse_box_data } from "../utils"
+import { parse_piece_data } from "../utils"
 import Piece from "../pieces/Piece"
 
 const Board = () => {
@@ -12,7 +12,7 @@ const Board = () => {
 	const board = useSelector(s => s.board);
 
 	const handle_pieces = (box_data_string, box_name) => {
-		const d = parse_box_data(box_data_string)
+		const d = parse_piece_data(box_data_string)
 		switch (d?.type) {
 			case "pawn":
 				return <Pawn side = {d.side} position = {box_name} />

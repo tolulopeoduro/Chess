@@ -1,8 +1,12 @@
 import React from "react";
+import { parse_piece_data } from "../utils";
+import { store } from "../Redux/Store"
 
 export default class Piece extends React.Component {
 	constructor (props) {
 		super(props);
+		this.side = this.props.side;
+		this.position = this.props.position;
 	}
 
 	rows = ["a", "b", "c", "d", "e", "f", "g", "h"];
@@ -76,8 +80,19 @@ export default class Piece extends React.Component {
 	}
 
 	check_box_availability (box) {
-		return;
 		if (!box) return false; 
-		return box.piece === null || box.piece.side !== this.side;
+		const {board} = store.getState(s => s)
+		const box_data = board[box];
+		if (!box_data.piece) return box;
+	}
+	
+	check_for_kill (box) {
+		if (!box) return; 
+		const {board} = store.getState(s => s)
+		const box_data = board[box];
+		if (!box_data.piece) return;
+
+		const piece_data = parse_piece_data(box_data.piece);
+		return piece_data.side !== this.side ? box : null;
 	}
 }

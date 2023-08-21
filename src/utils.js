@@ -51,7 +51,7 @@ export const new_board = () => {
 	return board;
 }
 
-export const parse_box_data = (str) => {
+export const parse_piece_data = (str) => {
 	if(!str) return null;
 	let split_str = str.split('_');
 	return {
