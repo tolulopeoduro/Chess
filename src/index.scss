@@ -52,6 +52,7 @@ p, h1, h2, h3, h4, h5, h6 {
 	--board_edges : #6f695e;
 	--pieces_a: #B6B6B6;
 	--pieces_b: #717171;
+	--available_move: #c2b297;
 }
 :root > * > .dark_theme {
 	--background : #45413ba6;
@@ -60,6 +61,7 @@ p, h1, h2, h3, h4, h5, h6 {
 	--board_edges : #2b2924;
 	--pieces_a: #B6B6B6;
 	--pieces_b: #717171;
+	--available_move: #c2b297;
 }
 
 :root > * > .white_and_black {
@@ -69,4 +71,14 @@ p, h1, h2, h3, h4, h5, h6 {
 	--board_edges : #666564;
 	--pieces_a: #B6B6B6;
 	--pieces_b: #717171;
+	--available_move : #9f9c9c;
+}
+
+@keyframes box_bend {
+	from {
+		border-radius: none;
+	}
+	to {
+		border-radius: 1rem;
+	}
 }

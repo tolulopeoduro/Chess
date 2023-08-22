@@ -48,6 +48,9 @@ export const new_board = () => {
 	fill_positions(queen_positions, "queen")
 	fill_positions(pawn_positions, "pawn")
 
+	board["f4"].piece = `pawn_a`
+	board["f7"].piece = `pawn_a`
+
 	return board;
 }
 

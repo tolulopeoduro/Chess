@@ -1,26 +1,14 @@
-import { useEffect } from "react"
 import styles from "./Board.module.scss"
-import classNames from "classnames"
-import { Icon } from "@iconify/react"
 import Pawn from "../pieces/Pawn"
 import { useSelector } from "react-redux"
 import { parse_piece_data } from "../utils"
-import Piece from "../pieces/Piece"
+import Box from "../Box/Box"
 
 const Board = () => {
 
 	const board = useSelector(s => s.board);
 
-	const handle_pieces = (box_data_string, box_name) => {
-		const d = parse_piece_data(box_data_string)
-		switch (d?.type) {
-			case "pawn":
-				return <Pawn side = {d.side} position = {box_name} />
-				break;
-			default:
-				break;
-		}
-	}
+	
 
 	return (
 		<div onClick={() => {
@@ -39,16 +27,7 @@ const Board = () => {
 				</div>
 				<div className={styles.box}>
 					{
-						Object.values(board).map((box, index) => {
-							return (
-								<div key={index}
-								className={classNames(styles.square, {[styles.white] : !box.colored, [styles.black] : box.colored})} >
-									{
-										handle_pieces(box.piece, box.name)
-									}
-								</div>
-							)
-						})
+						Object.values(board).map((box, index) => <Box key = {index} box = {box}/>)	
 					}
 				</div>
 				<div className={styles.board_right}>

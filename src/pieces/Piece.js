@@ -1,6 +1,7 @@
 import React from "react";
 import { parse_piece_data } from "../utils";
 import { store } from "../Redux/Store"
+import styles from "./piece_style.module.scss"
 
 export default class Piece extends React.Component {
 	constructor (props) {
@@ -11,7 +12,6 @@ export default class Piece extends React.Component {
 
 	rows = ["a", "b", "c", "d", "e", "f", "g", "h"];
 	columns = [1, 2, 3, 4, 5, 6, 7, 8];
-
 
 	move_down (position) {
 
