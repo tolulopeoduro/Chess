@@ -1,7 +1,8 @@
 import React from "react";
-import { parse_piece_data } from "../utils";
+import { move, parse_piece_data } from "../utils";
 import { store } from "../Redux/Store"
 import styles from "./piece_style.module.scss"
+import classNames from "classnames";
 
 export default class Piece extends React.Component {
 	constructor (props) {
@@ -20,7 +21,6 @@ export default class Piece extends React.Component {
 		const column = parseInt(position.split("")[1])
 		
 		const row_index = this.rows.indexOf(row);
-		
 		if (row_index !== -1 && row_index < 7) {
 			const new_row = this.rows[row_index+1]
 			return new_row+column;
@@ -35,7 +35,7 @@ export default class Piece extends React.Component {
 		
 		const row_index = this.rows.indexOf(row);
 		
-		if (row_index !== -1 && row_index > 0) {
+		if (row_index !== -1 && row_index >= 0) {
 			const new_row = this.rows[row_index-1]
 			return new_row+column;
 		}
@@ -46,7 +46,7 @@ export default class Piece extends React.Component {
 		const row = position.split("")[0];
 		const column = parseInt(position.split("")[1]);
 		const column_index = this.columns.indexOf(column);
-		if (column_index !== -1 && column_index > 0) {
+		if (column_index !== -1 && column_index >= 0) {
 			const new_column = this.columns[column_index-1];
 			return row+new_column;
 		}
@@ -81,18 +81,32 @@ export default class Piece extends React.Component {
 
 	check_box_availability (box) {
 		if (!box) return false; 
-		const {board} = store.getState(s => s)
+		const board = store.getState(s => s).board;
 		const box_data = board[box];
-		if (!box_data.piece) return box;
+		if (!box_data.piece_string_data) return box;
 	}
 	
 	check_for_kill (box) {
 		if (!box) return; 
-		const {board} = store.getState(s => s)
+		const board = store.getState(s => s).board
 		const box_data = board[box];
-		if (!box_data.piece) return;
+		if (!box_data.piece_string_data) return;
+		
+		const piece_data = parse_piece_data(box_data.piece_string_data);
+		return piece_data.side !== this.props.side ? box : null;
+	}
 
-		const piece_data = parse_piece_data(box_data.piece);
-		return piece_data.side !== this.side ? box : null;
+	handle_click () {
+		const selected_piece = store.getState(s => s).selected_piece;
+		move(selected_piece.position, this.position)
+	}
+
+	render () {
+		return (
+			<div onClick={() => this.handle_click()}
+			className={classNames({[styles.available_box]: this.props.is_available})}>
+				<div></div>
+			</div>
+		)
 	}
 }

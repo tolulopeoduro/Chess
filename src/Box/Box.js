@@ -4,6 +4,7 @@ import styles from "./Box.module.scss"
 import { parse_piece_data } from '../utils'
 import Pawn from '../pieces/Pawn'
 import { useSelector } from 'react-redux'
+import Piece from '../pieces/Piece'
 
 const Box = (props) => {
 	
@@ -28,6 +29,7 @@ const Box = (props) => {
 				return <Pawn side = {d.side} position = {box_name} is_available = {is_available}  />
 				break;
 			default:
+				return <Piece side={null} position={box_name} is_available = {is_available}/>
 				break;
 		}
 	}
@@ -35,18 +37,14 @@ const Box = (props) => {
 	const classes = {
 		[styles.white] : !box.colored,
 		[styles.black] : box.colored,
-		[styles.available_piece] : box_is_available() && box.piece
+		[styles.available_piece] : box_is_available() && box.piece_string_data
 	}
 	
 	return (
 		<div id = {box.name} 
 		className={classNames(styles.square, classes)} >
 			{
-				box.piece ? handle_pieces(box.piece, box.name) : 
-				box_is_available() ?
-				<div className={styles.available_box}>
-					<div></div>
-				</div> : null
+				handle_pieces(box.piece_string_data, box.name)
 			}
 		</div>
 	)

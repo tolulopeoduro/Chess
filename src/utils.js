@@ -1,57 +1,32 @@
-export const new_board = () => {
-	let board = {};
+import { store } from "./Redux/Store";
+import { update_available_moves } from "./Redux/reducers/available_moves_reducer";
+import { update_board } from "./Redux/reducers/board_reducer";
+import { update_selected_piece } from "./Redux/reducers/selected_piece";
 
-	let s = true;
-	let j = 1;
 
-	const fill_positions = (ar, piece_type) => {
-		ar.forEach(pos => {
-			let index = Object.keys(board).indexOf(pos)
-			board[pos].piece = `${piece_type}_${get_piece_side(index)}`
-		})
+
+export const move = (current_square, target_square) => {
+	let board = {...store.getState(s => s).board};
+	let current_square_data = board[current_square];
+	let target_square_data = board[target_square];
+
+	if (target_square_data.piece_string_data) {
+		// console.log(target_square_data.piece_string_data, 'lmhoho');
+		// return
+	}
+	
+	board[target_square] = {
+		...target_square_data,
+		piece_string_data: current_square_data.piece_string_data
 	}
 
-	const get_piece_side = (i) => i <= 31 ? "a" : "b";
+	board[current_square] = {
+		...current_square_data,
+		piece_string_data: null
+	}
 
-	const rook_positions = ["a1", "a8", "h1" ,"h8"];
-	const bishop_positions = ["a3", "a6", "h3", "h6"];
-	const knight_positions = ["a2", "a7", "h2","h2"];
-	const king_positions = ["a5", "h5"];
-	const queen_positions = ["a4", "h4"];
-	const pawn_positions = 
-	["b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8", 
-	"g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8" ]
-
-
-
-	let i = 0;
-
-	const rows = ["a", "b", "c", "d", "e", "f", "g", "h"];
-	const columns = [1, 2, 3, 4, 5, 6, 7, 8];
-
-	rows.forEach(row => {
-		columns.forEach(column => {
-			let box_name = row+column;
-			board[box_name] = {
-				colored: s ? i % 2 === 0 : i % 2 !== 0,
-				name : box_name
-			}
-			i++;
-		})
-		s = s? false : true;
-	})
-
-	fill_positions(rook_positions, "rook")
-	fill_positions(bishop_positions, "bishop")
-	fill_positions(knight_positions, "knight")
-	fill_positions(king_positions, "king")
-	fill_positions(queen_positions, "queen")
-	fill_positions(pawn_positions, "pawn")
-
-	board["f4"].piece = `pawn_a`
-	board["f7"].piece = `pawn_a`
-
-	return board;
+	store.dispatch(update_selected_piece(null))
+	store.dispatch(update_board(board));
 }
 
 export const parse_piece_data = (str) => {
