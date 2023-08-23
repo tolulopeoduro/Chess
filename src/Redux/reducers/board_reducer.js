@@ -17,7 +17,7 @@ const new_board = () => {
 
 	const rook_positions = ["a1", "a8", "h1" ,"h8"];
 	const bishop_positions = ["a3", "a6", "h3", "h6"];
-	const knight_positions = ["a2", "a7", "h2","h2"];
+	const knight_positions = ["a2", "a7", "h2","h7"];
 	const king_positions = ["a5", "h5"];
 	const queen_positions = ["a4", "h4"];
 	const pawn_positions = 
@@ -50,8 +50,6 @@ const new_board = () => {
 	fill_positions(queen_positions, "queen")
 	fill_positions(pawn_positions, "pawn")
 
-	board["f4"].piece_string_data = `pawn_a`
-	board["f7"].piece_string_data = `pawn_a`
 
 	return board;
 }

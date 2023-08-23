@@ -11,8 +11,7 @@ export const move = (current_square, target_square) => {
 	let target_square_data = board[target_square];
 
 	if (target_square_data.piece_string_data) {
-		// console.log(target_square_data.piece_string_data, 'lmhoho');
-		// return
+
 	}
 	
 	board[target_square] = {

@@ -6,6 +6,10 @@ import Pawn from '../pieces/Pawn'
 import { useSelector } from 'react-redux'
 import Piece from '../pieces/Piece'
 import Knight from '../pieces/Knight'
+import Rook from '../pieces/Rook'
+import Bishop from '../pieces/Bishop'
+import Queen from '../pieces/Queen'
+import King from '../pieces/King'
 
 const Box = (props) => {
 	
@@ -31,7 +35,19 @@ const Box = (props) => {
 			case "knight":
 				return <Knight side = {d.side} position = {box_name} is_available = {is_available}  />
 				break;
-			default:
+				case "rook":
+					return <Rook side = {d.side} position = {box_name} is_available = {is_available}  />
+				break;
+				case "bishop":
+					return <Bishop side = {d.side} position = {box_name} is_available = {is_available}  />
+				break;
+				case "queen":
+					return <Queen side = {d.side} position = {box_name} is_available = {is_available}  />
+				break;
+				case "king":
+					return <King side = {d.side} position = {box_name} is_available = {is_available}  />
+				break;
+				default:
 				return <Piece side={null} position={box_name} is_available = {is_available}/>
 				break;
 		}

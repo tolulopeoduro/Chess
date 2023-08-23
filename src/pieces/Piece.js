@@ -14,6 +14,51 @@ export default class Piece extends React.Component {
 	rows = ["a", "b", "c", "d", "e", "f", "g", "h"];
 	columns = [1, 2, 3, 4, 5, 6, 7, 8];
 
+	check_multiple_moves (position, direction, ar) {
+		const next = () => {
+			switch (direction) {
+				case "up":
+					return this.move_up(position);
+					break;
+				case "down":
+					return this.move_down(position);
+					break;
+				case "left":
+					return this.move_left(position);
+					break;
+				case "right":
+					return this.move_right(position);
+					break;
+				case "top_left":
+					return this.move_top_left(position);
+					break;
+				case "top_right":
+					return this.move_top_right(position);
+					break;
+				case "bottom_left":
+					return this.move_bottom_left(position);
+					break;
+				case "bottom_right":
+					return this.move_bottom_right(position);
+					break;
+				default:
+					break;
+			}
+		}
+		const next_square = next();
+		let next_is_avaiable = this.check_box_availability(next_square);
+		if (next_is_avaiable) {
+			console.log(next_square)
+			ar.push(next_square)
+
+			console.log(this.is_box_occupied(next_square))
+
+			if (!this.is_box_occupied(next_square)) {
+				this.check_multiple_moves(next_square, direction, ar);
+			}
+		}
+	}
+
 	move_down (position) {
 
 		if (!position) return null;
@@ -48,7 +93,7 @@ export default class Piece extends React.Component {
 		const row = position.split("")[0];
 		const column = parseInt(position.split("")[1]);
 		const column_index = this.columns.indexOf(column);
-		if (column_index !== -1 && column_index >= 0) {
+		if (column_index !== -1 && column_index > 0) {
 			const new_column = this.columns[column_index-1];
 			return row+new_column;
 		}
@@ -80,6 +125,12 @@ export default class Piece extends React.Component {
 	}
 	move_bottom_right (position) {
 		return this.move_right(this.move_down(position));
+	}
+
+	is_box_occupied (box) {
+		const board = store.getState(s => s).board;
+		const box_data = board[box];
+		return box_data?.piece_string_data;
 	}
 
 	check_box_availability (box, is_pawn) {
