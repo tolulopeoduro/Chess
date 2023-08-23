@@ -47,6 +47,7 @@ export default class Queen extends Piece {
 		let next_is_avaiable = this.check_box_availability(next_square);
 		if (next_is_avaiable) {
 			ar.push(next_square)
+
 			if (!this.is_box_occupied(next_square)) {
 				this.check_multiple_moves(next_square, direction, ar);
 			}

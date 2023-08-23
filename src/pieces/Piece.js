@@ -48,11 +48,7 @@ export default class Piece extends React.Component {
 		const next_square = next();
 		let next_is_avaiable = this.check_box_availability(next_square);
 		if (next_is_avaiable) {
-			console.log(next_square)
 			ar.push(next_square)
-
-			console.log(this.is_box_occupied(next_square))
-
 			if (!this.is_box_occupied(next_square)) {
 				this.check_multiple_moves(next_square, direction, ar);
 			}
