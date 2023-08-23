@@ -1,0 +1,28 @@
+.piece {
+	> svg {
+		height: 2.5rem;
+		width: 2.5rem;
+	}
+}
+
+.numbers {
+	color: #fff;
+	background-color: red;
+	height: 1.4rem;
+	width: 1.4rem;
+	font-size: 0.8rem;
+	border-radius: 50%;
+	position: absolute;
+	margin-top: -1.3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.a > svg > path {
+	fill: var(--pieces_a);
+}
+
+.b > svg > path {
+	fill: var(--pieces_b);
+}

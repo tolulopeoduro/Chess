@@ -36,12 +36,18 @@ export const move = (current_square, target_square) => {
 const remove_piece = (piece_string_data) => {
 	let piece_data = parse_piece_data(piece_string_data);
 	if (!piece_data) return;
-	const {side} = piece_data;
+	const {side, type} = piece_data;
 	let removed_pieces = {...store.getState(s => s).removed_pieces};
-	removed_pieces = {
-		...removed_pieces,
-		[side] : [...removed_pieces[side], piece_string_data]
+	let pieces_for_player = {...removed_pieces[side]};
+
+	if(pieces_for_player[type]) {
+		pieces_for_player[type] = pieces_for_player[type]+1;
+	} else {
+		pieces_for_player[type] = 1;
 	}
+
+	removed_pieces = {...removed_pieces, [side] : pieces_for_player}
+	
 	store.dispatch(update_removed_pieces(removed_pieces))
 }
 
@@ -71,15 +77,27 @@ export const handle_piece_click = (box) => {
 		}
 	}
 
-
-
+	
 	if (selected_piece) {
 		const selected_piece_side = parse_piece_data(selected_piece?.piece_str)?.side;
 		const available_moves = selected_piece.available_moves;
-	
-		if (((available_moves && selected_piece_side) && selected_piece_side != box.side) && available_moves.includes(box.position)) {
+		
+		if (available_moves && available_moves.includes(box.position)) {
 			move(selected_piece.position, box.position);
 		}
 		
 	}
 }	
+
+export const organise_pieces = (ar) => {
+	let obj = {};
+	ar.forEach(element => {
+		let name = element.split("_")[0]
+		if (!obj[name]) {
+			obj[name] = 1;
+		} else {
+			obj[name] = obj[name]+1;
+		}
+	});
+	return obj;
+}

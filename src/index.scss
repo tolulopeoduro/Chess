@@ -45,7 +45,9 @@ p, h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
-:root > * > .light_theme {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+:root > * > .light_theme_1 {
 	--background : #f1e6d2a6;
 	--white_square : #f1e6d2;
 	--black_square : #999284;
@@ -53,12 +55,24 @@ p, h1, h2, h3, h4, h5, h6 {
 	--pieces_a: #B6B6B6;
 	--pieces_b: #717171;
 	--available_move: #c2b297;
+	--player_turn_indicator: #c5f9a9;
 }
-:root > * > .dark_theme {
+
+:root > * > .dark_theme_1 {
 	--background : #45413ba6;
 	--white_square : #a59d8e;
 	--black_square : #434039;
 	--board_edges : #2b2924;
+	--pieces_a: #B6B6B6;
+	--pieces_b: #717171;
+	--available_move: #c2b297;
+}
+
+:root > * > .dark_theme_2 {
+	--background : #000226;
+	--white_square : #FFFFFF;
+	--black_square : #2E2E2E;
+	--board_edges : #0C0C0C;
 	--pieces_a: #B6B6B6;
 	--pieces_b: #717171;
 	--available_move: #c2b297;
@@ -81,4 +95,8 @@ p, h1, h2, h3, h4, h5, h6 {
 	to {
 		border-radius: 1rem;
 	}
+}
+
+* {
+	font-family: 'Montserrat', sans-serif;
 }
