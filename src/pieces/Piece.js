@@ -30,6 +30,7 @@ export default class Piece extends React.Component {
 	}
 
 	move_up (position) {
+		if (!position) return null;
 		const row = position.split("")[0]
 		const column = parseInt(position.split("")[1])
 		
@@ -43,6 +44,7 @@ export default class Piece extends React.Component {
 	}
 
 	move_left (position) {
+		if (!position) return null;
 		const row = position.split("")[0];
 		const column = parseInt(position.split("")[1]);
 		const column_index = this.columns.indexOf(column);
@@ -54,6 +56,7 @@ export default class Piece extends React.Component {
 	}
 
 	move_right (position) {
+		if (!position) return null;
 		const row = position.split("")[0]
 		const column = parseInt(position.split("")[1])
 		
@@ -79,11 +82,14 @@ export default class Piece extends React.Component {
 		return this.move_right(this.move_down(position));
 	}
 
-	check_box_availability (box) {
+	check_box_availability (box, is_pawn) {
 		if (!box) return false; 
 		const board = store.getState(s => s).board;
 		const box_data = board[box];
-		if (!box_data.piece_string_data) return box;
+		if (!box_data?.piece_string_data) return box;
+		if (!is_pawn) {
+			return this.check_for_kill(box);
+		}
 	}
 	
 	check_for_kill (box) {
@@ -95,6 +101,8 @@ export default class Piece extends React.Component {
 		const piece_data = parse_piece_data(box_data.piece_string_data);
 		return piece_data.side !== this.props.side ? box : null;
 	}
+
+
 
 	handle_click () {
 		const selected_piece = store.getState(s => s).selected_piece;

@@ -5,6 +5,7 @@ import { parse_piece_data } from '../utils'
 import Pawn from '../pieces/Pawn'
 import { useSelector } from 'react-redux'
 import Piece from '../pieces/Piece'
+import Knight from '../pieces/Knight'
 
 const Box = (props) => {
 	
@@ -27,6 +28,8 @@ const Box = (props) => {
 		switch (d?.type) {
 			case "pawn":
 				return <Pawn side = {d.side} position = {box_name} is_available = {is_available}  />
+			case "knight":
+				return <Knight side = {d.side} position = {box_name} is_available = {is_available}  />
 				break;
 			default:
 				return <Piece side={null} position={box_name} is_available = {is_available}/>

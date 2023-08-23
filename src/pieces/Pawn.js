@@ -3,7 +3,7 @@ import Piece from "./Piece";
 import styles from "./piece_style.module.scss";
 import { store } from "../Redux/Store";
 import { update_selected_piece } from "../Redux/reducers/selected_piece";
-import { move, parse_piece_data } from "../utils";
+import { handle_piece_click, move, parse_piece_data } from "../utils";
 
 export default class Pawn extends Piece {
 	constructor (props) {
@@ -20,39 +20,26 @@ export default class Pawn extends Piece {
 		let moves = [];
 		if (this.props.side === "b") {
 			moves = [
-				this.check_box_availability(this.move_up(this.position)),
-				...(this.position.split("")[0] === "g" && this.check_box_availability(this.move_up(this.position))) ? 
-				[this.check_box_availability(this.move_up(this.move_up(this.position)))] : [],
+				this.check_box_availability(this.move_up(this.position), true),
+				...(this.position.split("")[0] === "g" && this.check_box_availability(this.move_up(this.position), true)) ? 
+				[this.check_box_availability(this.move_up(this.move_up(this.position)), true)] : [],
 				this.check_for_kill(this.move_top_left(this.position)),
 				this.check_for_kill(this.move_top_right(this.position)),	
 			]
 		} else {
 			moves = [
-				this.check_box_availability(this.move_down(this.position)),
-				...(this.position.split("")[0] === "b" && this.check_box_availability(this.move_down(this.position))) ? 
-				[this.check_box_availability(this.move_down(this.move_down(this.position)))] : [],
+				this.check_box_availability(this.move_down(this.position), true),
+				...(this.position.split("")[0] === "b" && this.check_box_availability(this.move_down(this.position), true)) ? 
+				[this.check_box_availability(this.move_down(this.move_down(this.position)), true)] : [],
 				this.check_for_kill(this.move_bottom_left(this.position)),
 				this.check_for_kill(this.move_bottom_right(this.position))
 			]
 		}
-		console.log(moves);
 		return moves.filter(move => move);
 	}
 	
 	handle_click () {
-		const selected_piece = store.getState(s => s).selected_piece;
-		const selected_piece_side = parse_piece_data(selected_piece?.piece_str)?.side;
-
-		if ((selected_piece_side && selected_piece_side != this.side) && selected_piece?.available_moves.includes(this.position)) {
-			
-			move(selected_piece.position, this.position)
-			return;
-		}
-		store.dispatch(update_selected_piece({
-			position : this.position,
-			piece_str: `${this.type}_${this.side}`,
-			available_moves: this.list_available_moves()
-		}))
+		handle_piece_click(this)
 	}
 
 	render () {
