@@ -1,28 +1,41 @@
 .piece {
 	> svg {
-		height: 2.5rem;
-		width: 2.5rem;
+		height: 1.4rem;
+		width: fit-content;//1.4rem;
 	}
 }
 
 .numbers {
 	color: #fff;
 	background-color: red;
-	height: 1.4rem;
-	width: 1.4rem;
-	font-size: 0.8rem;
+	height: 1em;
+	width: 1em;
+	font-size: 0.7em;
 	border-radius: 50%;
 	position: absolute;
-	margin-top: -1.3rem;
+	margin-top: -1em;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.a > svg > path {
-	fill: var(--pieces_a);
+.a {
+	justify-content: flex-start;
+	align-items: center;
+
+	> svg > path {
+		fill: var(--pieces_a);
+	}
 }
 
 .b > svg > path {
 	fill: var(--pieces_b);
+}
+
+@media screen and (orientation : landscape) and (min-height: 700px) {
+	.piece {
+		> svg {
+			height: 2.5rem;
+		}
+	}
 }

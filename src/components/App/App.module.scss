@@ -7,18 +7,24 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 	transition: all 200ms;
+	padding-top: 1rem;
+	overflow: none;
 
+	
 	> div {
 		max-width: 90vw;
 		min-width: 80vw;
 		display: flex;
 		justify-content: space-between;
+		flex-direction: column;
+		overflow: none;
 	}
-
 }
 
 .switch {
+	display: none;
 	background-color: var(--black_square);
 	position: absolute;
 	bottom: 1rem;
@@ -29,4 +35,20 @@
 	justify-content: center;
 	align-items: center;
 	outline: none;
+}
+
+@media screen and (orientation : landscape) {
+	.App {
+		> div {
+			justify-content: center;
+			flex-direction: row;
+			height: 85vh;
+			width: 1000px;
+			overflow: hidden;
+
+			> .buttons {
+				display: none;
+			}
+		}
+	}
 }

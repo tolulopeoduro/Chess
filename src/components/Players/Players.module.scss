@@ -1,0 +1,21 @@
+.Players {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 1rem;
+	height: auto;
+	position: relative;
+	width: 100%;
+}
+
+
+@media screen and (orientation : landscape) {
+	.Players {
+		flex-direction: column;
+		height: 50%;
+		max-height: 10rem;
+	}
+	.hide {
+		display: none;
+	}
+}

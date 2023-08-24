@@ -1,0 +1,98 @@
+.playerData {
+	font-family: monospace;
+	width: 48%;
+	border-radius: 0.5rem;
+	background-color: var(--black_square);
+	box-sizing: border-box;
+	display: flex;
+	align-content: center;
+
+	> div {
+		position: relative;
+		height: 100%;
+	}
+
+	> .icon {
+		position: absolute;
+		margin-left: 1rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		> svg {
+			height: 3rem;
+			width: fit-content;
+			opacity: 0.8;
+		}
+	}
+
+	> .player_info {
+		height: 70%;
+		display: flex;
+		justify-content: space-between;
+		flex-direction: column;
+		margin-left: 1rem;
+
+		> h1 {
+			font-size: 130%;
+			font-weight: bold;
+		};
+	}
+	
+}
+
+.a > path {
+	fill : var(--pieces_a)
+};
+.b > path {
+	fill : var(--pieces_b)
+};
+
+.turn {
+	// border: 6px solid var(--player_turn_indicator);
+	// box-shadow: 0px 0px 8px 4px rgba($color: var(--player_turn_indicator), $alpha: 1.0);
+}	
+
+@media screen and (orientation: portrait) and (min-width : 600px) {
+	.playerData {
+		height: 7rem;
+		align-items: center;
+
+		> .icon {
+			position: relative;
+			height: 90%;
+			> svg {
+				height: 70%;
+			}
+		}
+
+		>.player_info {
+			> h1 {
+				font-size: 180%;
+			}
+
+			> p {
+				font-weight: 700;
+				font-size: 140%;
+			}
+		}
+	}
+}
+
+@media screen and (orientation : landscape) {
+	.playerData {
+		width: 100%;
+		height: 49%;
+		justify-content: flex-start;
+		align-items: center;
+		
+		> .icon {
+			position: relative;
+			height: 90%;
+			> svg {
+				size: 10px;
+			}
+		}
+	}
+
+}

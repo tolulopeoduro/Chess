@@ -1,6 +1,6 @@
 .board {
-	height: 90vh;
-	width: 90vh;
+	height: 90vw;
+	width: 90vw;
 	background-color: var(--board_edges);
 	border-radius: 0.25rem;
 }
@@ -71,3 +71,10 @@
 	
 }
 
+
+@media screen and (orientation : landscape) {
+	.board {
+		height: 85vh;
+		width: 85vh;
+	}
+}
