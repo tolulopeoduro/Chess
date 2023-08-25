@@ -14,9 +14,9 @@ export default (props) => {
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
 						<path fill="currentColor" d="M4 21V9l8-6l8 6v12h-6v-7h-4v7H4Z"/>
 					</svg>
-					<span>Home</span>
+					<span>MENU</span>
 				</button>
-				<button>
+				<button onClick={() => dispatch(update_modal("restart"))}>
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
 					<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" 
 					stroke-width="2"><path d="M12 3a9 9 0 1 1-5.657 2"/><path d="M3 4.5h4v4"/></g>

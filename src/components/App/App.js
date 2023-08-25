@@ -9,6 +9,7 @@ import Backdrop from "../Backdrop/Backdrop"
 import MainMenu from "../Modals/MainMenu/MainMenu"
 import { useSelector } from "react-redux"
 import NewGameMenu from "../Modals/NewGameMenu/NewGameMenu"
+import RestartModal from "../Modals/RestartModal/RestartModal"
 
 const App = () => {
 
@@ -36,6 +37,9 @@ const App = () => {
 				}
 				{
 					modal === "new_game" && <Backdrop child = {<NewGameMenu/>}/>
+				}
+				{
+					modal === "restart" && <Backdrop child = {<RestartModal/>}/>
 				}
 				<select value={theme} onChange={(e) => set_theme(e.target.value)} className={styles.switch}>
 					<optgroup label="dark themes">
