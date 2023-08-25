@@ -1,15 +1,15 @@
 import classNames from "classnames";
 import styles from "./PlayerData.module.scss"
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 export default (props) => {
 
-	const {side} = props;
+	const {side, player_name} = props;
 	const {turn} = useSelector(s => s);
 
-
 	return (
-		<div className={classNames(styles.playerData, {[styles.turn] : turn === side })}>
+		<div className={classNames(styles.playerData)}>
 				<div className={styles.icon}>
 					<svg className={styles[side]} xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" viewBox="0 0 448 512"><path fill="#b6b6b6" 
 					d="M224 0c17.7 0 32 14.3 32 32v16h16c17.7 0 32 14.3 32 32s-14.3 32-32 32h-16v48h152c22.1 0 40 17.9 40 40c0 5.3-1 10.5-3.1 15.4L368 400H80L3.1
@@ -18,8 +18,10 @@ export default (props) => {
 					 </svg>
 				</div>
 				<div className={styles.player_info}>
-					<h1>Player</h1>
+					<h1>{player_name}</h1>
 					<p>00:00:00</p>
+				</div>
+				<div className={classNames(styles.turn_indicator, {[styles.turn] : turn === side})}>
 				</div>
 			</div>
 	)

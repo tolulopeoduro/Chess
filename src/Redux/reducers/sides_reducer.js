@@ -13,16 +13,12 @@ const sides = createSlice({
 		}
 	},
 	reducers : {
-		set_side:(state, action) => {
-			const {side, data} = action.payload;
-			return {
-				...state, 
-				[side] : data
-			}
+		set_sides:(state, action) => {
+			return action.payload
 		}
 	}
 })
 
 export default sides.reducer;
 
-export const {set_side} = sides.actions;
+export const {set_sides} = sides.actions;

@@ -5,10 +5,15 @@ import classNames from "classnames"
 import LeftSide from "../LeftSide/LeftSide"
 import Buttons from "../LeftSide/Buttons/Buttons"
 import Players from "../Players/Players"
+import Backdrop from "../Backdrop/Backdrop"
+import MainMenu from "../Modals/MainMenu/MainMenu"
+import { useSelector } from "react-redux"
+import NewGameMenu from "../Modals/NewGameMenu/NewGameMenu"
 
 const App = () => {
 
 	const [orientation, set_orientation] = useState(null);
+	const {modal} = useSelector(s => s)
 
 	useEffect(() => {
 		set_orientation(window.screen.orientation.type.split("-")[0]);
@@ -26,6 +31,12 @@ const App = () => {
 				<Buttons portrait/>
 				<Board/>
 				<Players portrait/>
+				{
+					modal === "main_menu" && <Backdrop child = {<MainMenu/>}/>
+				}
+				{
+					modal === "new_game" && <Backdrop child = {<NewGameMenu/>}/>
+				}
 				<select value={theme} onChange={(e) => set_theme(e.target.value)} className={styles.switch}>
 					<optgroup label="dark themes">
 						<option value={"dark_theme_1"}>

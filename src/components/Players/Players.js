@@ -2,15 +2,16 @@ import classNames from "classnames"
 import PlayerData from "../PlayerData/PlayerData"
 import styles from "./Players.module.scss"
 import { useEffect } from "react"
+import { useSelector } from "react-redux"
 
 export default (props) => {
 
-	useEffect(() => console.log(props.portrait), [])
+	const {sides : player_data} = useSelector(s => s);
 
 	return (
 		<div className={classNames(styles.Players, {[styles.hide]: props.portrait})}>
-			<PlayerData side="a"/>
-			<PlayerData side="b"/>
+			<PlayerData {...player_data?.["a"]}/>
+			<PlayerData {...player_data?.["b"]}/>
 		</div>
 	)
 }

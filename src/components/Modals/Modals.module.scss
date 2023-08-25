@@ -1,0 +1,23 @@
+.modal_container {
+	width: 90vw;
+	height: auto;
+	min-height: 15rem;
+	background-color: var(--white_square);
+	border-radius: 0.25rem;
+
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: column;
+}
+
+@media screen and (orientation : landscape) {
+	.modal_container {
+		width: 90vh;
+	}
+}
+@media screen and (min-width : 500px) {
+	.modal_container {
+		width: 400px;
+	}
+}

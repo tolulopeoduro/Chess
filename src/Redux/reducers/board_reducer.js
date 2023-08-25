@@ -60,10 +60,13 @@ const board = createSlice({
 	reducers : {
 		update_board : (state, action) => {
 			return action.payload;
+		},
+		reset_board : (state, action) => {
+			return new_board();
 		}
 	}
 })
 
 export default board.reducer;
 
-export const {update_board} = board.actions;
+export const {update_board, reset_board} = board.actions;

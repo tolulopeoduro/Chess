@@ -1,0 +1,73 @@
+.container {
+	padding: 0.5rem 0 2rem;
+	> .header {
+		display: flex;
+		width: 80%;
+		position: relative;
+		justify-content: center;
+		align-items: center;
+		font-size: small;
+
+		> .back_button {
+			position: absolute;
+			height: 100%;
+			left: 0;
+			display: flex;
+			align-items: center;
+
+			> svg {
+				height: 80%;
+				width: fit-content;
+			}
+		}
+	}
+
+	> .inputs {
+		display: inherit;
+		flex-direction: inherit;
+		justify-content: inherit;
+		align-items: inherit;
+		width: 70%;
+		height: 6rem;
+		margin-bottom: 1rem;
+
+		> input {
+			background-color: transparent;
+			border: 0.2rem solid var(--pieces_a);
+			color: var(--pieces_a);
+			font-size: medium;
+			text-align: center;
+			width: 100%;
+			height: 2.5rem;
+		}	
+	}
+	
+	> button {
+		width: 70%;	
+		height: 2.5rem;
+		background-color: var(--pieces_a) ;
+		border: 0.2rem solid var(--pieces_a);
+		color: var(--white_square);
+		font-size: medium;
+		text-align: center;
+		margin-bottom: 0.5rem;
+	}
+
+	.info {
+		font-size: 0.7rem;
+		text-align: center;
+		line-height: 0.7rem;
+		word-wrap:normal;
+		display: flex;
+		width: 70%;
+		align-content: flex-start;
+
+		> svg {
+			height: 0.7rem;
+			display: inline-flex;
+			width: 0.7rem;
+			align-items: center;
+			justify-self: baseline;
+		}
+	}
+}
